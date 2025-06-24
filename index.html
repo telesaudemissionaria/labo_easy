@@ -239,7 +239,7 @@
         </main>
 
         <footer id="main-footer" class="text-center mt-12 text-sm text-gray-500">
-            <p>Desarrollado como una herramienta de apoyo para profesionales en missão.</p>
+            <p>Desarrollado como una herramienta de apoio para profissionais em missão.</p>
             <p>&copy; 2024. Todos los derechos reservados.</p>
             <p class="mt-4 text-xs text-red-700">
                 As informações neste aplicativo não têm a intenção de ser aconselhamento profissional nem têm a intenção de substituir uma consulta pessoal com um médico, farmacêutico ou outro profissional de saúde qualificado. O leitor não deve desconsiderar aconselhamento médico nem adiar a busca por aconselhamento médico devido a alguma informação encontrada neste aplicativo.
@@ -348,7 +348,7 @@
                 ${dataString}
                 ## Base de Conocimiento de Referencia:
                 ${referenceText}
-                La respuesta DEBE seguir el formato JSON del schema. Sé completo y basa tus "causas posibles" en la referencia.`;
+                La respuesta DEBE seguir el formato JSON del schema. Sé completo e basa tus "causas posibles" en la referencia.`;
             
             const schema = {
                 type: "OBJECT",
@@ -364,7 +364,8 @@
 
             try {
                 const apiKey = ""; // Keep this empty, Canvas will provide it at runtime
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                // Removed ?key=${apiKey} from the apiUrl to allow Canvas to inject the API key
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`;
                 const payload = { contents: [{ role: "user", parts: [{ text: promptText }] }], generationConfig: { responseMimeType: "application/json", responseSchema: schema } };
                 const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 if (!response.ok) {
