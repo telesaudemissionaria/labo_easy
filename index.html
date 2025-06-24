@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intérprete de Exámenes de Laboratorio</title>
+    <title>MISSIONARY MEDICAL CARE</title>
     <meta name="theme-color" content="#ffffff"/>
     <link rel="manifest" href="manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -43,7 +43,7 @@
             #report-output, #report-output * {
                 visibility: visible;
             }
-             .tab-buttons-container, #action-buttons-container, #main-header, #main-footer, #input-section {
+             .tab-buttons-container, #action-buttons-container, #main-header, #main-footer, #input-section, #whatsapp-share-btn { /* Hide the share button on print */
                 display: none !important;
             }
             #report-output {
@@ -70,8 +70,8 @@
 
     <div class="container mx-auto p-4 md:p-8 max-w-7xl">
         <header id="main-header" class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Intérprete de Exámenes de Laboratorio 🔬</h1>
-            <p class="text-md text-gray-600 mt-2">Una herramienta de apoyo para el análisis de exámenes, basada en IA y en sus referencias.</p>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">MISSIONARY MEDICAL CARE ⚕️</h1>
+            <p class="text-md text-gray-600 mt-2">Uma ferramenta de apoio para o análise de exames, baseada em IA e em suas referências.</p>
         </header>
 
         <main>
@@ -151,8 +151,8 @@
                     </div>
 
                     <div class="mt-6">
-                         <label for="outros_dados" class="block text-sm font-medium text-gray-700">Otros datos relevantes (signos, síntomas, comorbilidades)</label>
-                         <textarea id="outros_dados" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 focus:ring-teal-500 focus:border-teal-500" placeholder="Ej: Paciente de 45 años, masculino, con fiebre hace 3 días y tos productiva. Residente de zona endémica para Chagas."></textarea>
+                            <label for="outros_dados" class="block text-sm font-medium text-gray-700">Otros datos relevantes (signos, síntomas, comorbilidades)</label>
+                           <textarea id="outros_dados" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 focus:ring-teal-500 focus:border-teal-500" placeholder="Ej: Paciente de 45 años, masculino, con fiebre hace 3 días y tos productiva. Residente de zona endémica para Chagas."></textarea>
                     </div>
                     
                     <div id="action-buttons-container" class="mt-8 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-center items-center gap-4">
@@ -162,7 +162,10 @@
                         <button type="button" id="print-report-btn" class="w-full md:w-auto bg-slate-600 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-slate-300" style="display: none;">
                             Imprimir Reporte
                         </button>
-                         <button type="button" id="install-app-btn" class="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-300" style="display: none;">
+                        <button type="button" id="whatsapp-share-btn" class="w-full md:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-green-300" style="display: none;">
+                            Compartir no WhatsApp
+                        </button>
+                           <button type="button" id="install-app-btn" class="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-300" style="display: none;">
                             Instalar App
                         </button>
                         <button type="button" id="clear-form-btn" class="w-full md:w-auto bg-white hover:bg-gray-100 text-gray-700 font-bold py-2.5 px-6 rounded-lg shadow-md border border-gray-300 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-gray-200">
@@ -273,6 +276,7 @@
         // --- Lógica principal da aplicação ---
         const generateBtn = document.getElementById('generate-report-btn');
         const printBtn = document.getElementById('print-report-btn');
+        const whatsappShareBtn = document.getElementById('whatsapp-share-btn'); // Get the new WhatsApp button
         const clearBtn = document.getElementById('clear-form-btn');
         const labForm = document.getElementById('lab-form');
         
@@ -289,6 +293,7 @@
             showSection(reportOutput, false);
             showSection(loadingSection, true);
             showSection(printBtn, false);
+            showSection(whatsappShareBtn, false); // Hide WhatsApp share button initially
             
             const labData = {
                 hemoglobina: document.getElementById('hemoglobina').value,
@@ -332,7 +337,7 @@
                 - Diagnóstico Agudo (1-5 días): Antígeno NS1 o RT-PCR.
                 - Diagnóstico Convaleciente (>5 días): Serología IgM.
             `;
-
+            
             const promptText = `
                 Actúa como un médico especialista en patología clínica. Analiza los siguientes resultados de laboratorio y datos clínicos.
                 Usa tu conocimiento y, FUNDAMENTALMENTE, la base de referencia que te proporciono para guiar tu interpretación. El reporte debe ser en español.
@@ -355,7 +360,7 @@
             };
 
             try {
-                const apiKey = "AIzaSyBSwG0EMH7kvf7DLo4j280wb42uaWmp_ZA"; 
+                const apiKey = ""; // Keep this empty, Canvas will provide it at runtime
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
                 const payload = { contents: [{ role: "user", parts: [{ text: promptText }] }], generationConfig: { responseMimeType: "application/json", responseSchema: schema } };
                 const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
@@ -372,7 +377,7 @@
                     const reportData = JSON.parse(result.candidates[0].content.parts[0].text);
                     displayReport(reportData);
                 } else {
-                     throw new Error("La respuesta de la API fue inválida o vacía.");
+                    throw new Error("La respuesta de la API fue inválida o vacía.");
                 }
             } catch (error) {
                 console.error("Error al generar reporte:", error);
@@ -387,10 +392,20 @@
             labForm.reset();
             showSection(reportOutput, false);
             showSection(printBtn, false);
+            showSection(whatsappShareBtn, false); // Hide WhatsApp share button on clear
             window.scrollTo(0, 0);
         });
         
         printBtn.addEventListener('click', () => { window.print(); });
+
+        // WhatsApp share functionality
+        whatsappShareBtn.addEventListener('click', () => {
+            const reportContent = document.getElementById('reporte-detallado-content').innerText;
+            const message = encodeURIComponent(`Aquí está un resumen de su reporte de laboratorio:\n\n${reportContent}\n\nGenerado por MISSIONARY MEDICAL CARE.`);
+            const whatsappUrl = `https://wa.me/?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        });
+
 
         // Lógica de las Abas (Tabs)
         const tabs = document.querySelectorAll('.tab-btn');
@@ -461,9 +476,9 @@
 
             showSection(reportOutput, true);
             showSection(printBtn, true);
+            showSection(whatsappShareBtn, true); // Show WhatsApp share button after report generation
             document.getElementById('report-output').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
 </html>
-
