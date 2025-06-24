@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intérprete de Exámenes de Laboratorio</title>
+    <meta name="theme-color" content="#111827"/>
+    <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .loader {
+            border-top-color: #3498db;
+            -webkit-animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .report-section {
+            display: none;
+        }
+        .prose h4 {
+            margin-top: 1.25em;
+            margin-bottom: 0.5em;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        .prose p {
+            margin-bottom: 1em;
+        }
+        @media print {
+            body {
+                background-color: white !important;
+                color: black !important;
+            }
+            body * {
+                visibility: hidden;
+                color: black !important;
+            }
+            #report-output, #report-output *, h1, h2, h3, h4, p, td, th {
+                visibility: visible;
+                color: black !important;
+            }
+            #report-output {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .report-section {
+                box-shadow: none;
+                border: 1px solid #ccc !important;
+                background-color: white !important;
+            }
+            #aviso-etico-section {
+                border-left-width: 4px !important;
+                background-color: #fefcbf !important; /* Yellow-100 */
+                color: #92400e !important; /* Yellow-800 */
+            }
+            #explicacion-sencilla-section {
+                 background-color: #eff6ff !important; /* Blue-50 */
+            }
+            #tabla-resumen-section table thead {
+                 background-color: #f9fafb !important; /* Gray-50 */
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        <header id="main-header" class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-white">Intérprete de Exámenes de Laboratorio 🔬</h1>
+            <p class="text-md text-gray-400 mt-2">Una herramienta de apoyo para el análisis de exámenes, basada en IA y en sus referencias.</p>
+        </header>
+
+        <main>
+            <!-- Sección de Inserción de Datos -->
+            <div id="input-section" class="bg-gray-800 p-6 rounded-lg shadow-md">
+                <form id="lab-form">
+                    <h2 class="text-2xl font-semibold mb-6 text-white border-b border-gray-600 pb-3">Datos del Paciente y Exámenes</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        
+                        <!-- Columna 1: Hematología -->
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3 text-red-400">Serie Roja</h3>
+                                <div class="space-y-2">
+                                    <div><label for="hemoglobina" class="text-sm font-medium text-gray-300">Hemoglobina (g/dL)</label><input type="text" id="hemoglobina" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="12-18"></div>
+                                    <div><label for="hematocrito" class="text-sm font-medium text-gray-300">Hematocrito (%)</label><input type="text" id="hematocrito" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="36-50"></div>
+                                    <div><label for="hematies" class="text-sm font-medium text-gray-300">G. Rojos (x10⁶/µL)</label><input type="text" id="hematies" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="4.0-6.0"></div>
+                                    <div><label for="vcm" class="text-sm font-medium text-gray-300">VCM (fL)</label><input type="text" id="vcm" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="80-93"></div>
+                                    <div><label for="hcm" class="text-sm font-medium text-gray-300">HCM (pg)</label><input type="text" id="hcm" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="27-32"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Columna 2: Serie Blanca & Coagulación -->
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3 text-blue-400">Serie Blanca</h3>
+                                 <div class="space-y-2">
+                                    <div><label for="leucocitos" class="text-sm font-medium text-gray-300">Leucocitos (/mm³)</label><input type="text" id="leucocitos" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="4.000-11.000"></div>
+                                    <div><label for="neutrofilos" class="text-sm font-medium text-gray-300">Neutrófilos (%)</label><input type="text" id="neutrofilos" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="45-75"></div>
+                                    <div><label for="linfocitos" class="text-sm font-medium text-gray-300">Linfocitos (%)</label><input type="text" id="linfocitos" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="25-40"></div>
+                                    <div><label for="monocitos" class="text-sm font-medium text-gray-300">Monocitos (%)</label><input type="text" id="monocitos" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="4-10"></div>
+                                    <div><label for="eosinofilos" class="text-sm font-medium text-gray-300">Eosinófilos (%)</label><input type="text" id="eosinofilos" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="0-5"></div>
+                                    <div><label for="basofilos" class="text-sm font-medium text-gray-300">Basófilos (%)</label><input type="text" id="basofilos" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="0-1.0"></div>
+                                    <div><label for="cayados" class="text-sm font-medium text-gray-300">Cayados (%)</label><input type="text" id="cayados" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="0-4"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3 text-purple-400">Coagulación</h3>
+                                <div class="space-y-2">
+                                    <div><label for="plaquetas" class="text-sm font-medium text-gray-300">Plaquetas (/mm³)</label><input type="text" id="plaquetas" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="150k-400k"></div>
+                                    <div><label for="tp" class="text-sm font-medium text-gray-300">T. Protrombina (seg)</label><input type="text" id="tp" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="9-12"></div>
+                                    <div><label for="inr" class="text-sm font-medium text-gray-300">I.N.R.</label><input type="text" id="inr" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="~1.0"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Columna 3: Química -->
+                        <div class="space-y-6">
+                             <div>
+                                <h3 class="text-xl font-semibold mb-3 text-green-400">Función Renal y Metabólica</h3>
+                                <div class="space-y-2">
+                                    <div><label for="glicose" class="text-sm font-medium text-gray-300">Glucemia (mg/dL)</label><input type="text" id="glicose" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="70-125"></div>
+                                    <div><label for="ureia" class="text-sm font-medium text-gray-300">Urea (mg/dL)</label><input type="text" id="ureia" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="20-45"></div>
+                                    <div><label for="creatinina" class="text-sm font-medium text-gray-300">Creatinina (mg/dL)</label><input type="text" id="creatinina" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="0.6-1.4"></div>
+                                    <div><label for="sodio" class="text-sm font-medium text-gray-300">Sodio (mEq/L)</label><input type="text" id="sodio" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="135–145"></div>
+                                    <div><label for="potassio" class="text-sm font-medium text-gray-300">Potasio (mEq/L)</label><input type="text" id="potassio" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="3.5-5.0"></div>
+                                    <div><label for="pcr" class="text-sm font-medium text-gray-300">PCR (mg/L)</label><input type="text" id="pcr" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="< 10"></div>
+                                </div>
+                            </div>
+                             <div>
+                                <h3 class="text-xl font-semibold mb-3 text-yellow-400">Función Hepática</h3>
+                                <div class="space-y-2">
+                                    <div><label for="ast_tgo" class="text-sm font-medium text-gray-300">AST/TGO (U/L)</label><input type="text" id="ast_tgo" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="10-40"></div>
+                                    <div><label for="alt_tgp" class="text-sm font-medium text-gray-300">ALT/TGP (U/L)</label><input type="text" id="alt_tgp" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="10-40"></div>
+                                    <div><label for="fa" class="text-sm font-medium text-gray-300">Fosfatasa Alcalina (UI/L)</label><input type="text" id="fa" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="68-240"></div>
+                                    <div><label for="bilirrubina_total" class="text-sm font-medium text-gray-300">Bilirrubina Total (mg/dL)</label><input type="text" id="bilirrubina_total" class="mt-1 w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 text-sm" placeholder="< 1.5"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Columna 4: Enfermedades Regionales -->
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3 text-orange-400">Enfermedades Regionales (Bolivia)</h3>
+                                <div class="bg-gray-700 p-4 rounded-lg space-y-4">
+                                    <div>
+                                        <h4 class="font-semibold text-orange-300">Chagas</h4>
+                                        <div class="space-y-2 mt-2">
+                                            <div><label for="chagas_micrometodo" class="text-sm font-medium text-gray-300">Micrométodo (RN/Lactante)</label><input type="text" id="chagas_micrometodo" class="mt-1 w-full rounded-md bg-gray-600 border-gray-500 text-white shadow-sm p-2 text-sm" placeholder="Positivo/Negativo"></div>
+                                            <div><label for="chagas_serologia_materna" class="text-sm font-medium text-gray-300">Serología Materna (HAI/ELISA)</label><input type="text" id="chagas_serologia_materna" class="mt-1 w-full rounded-md bg-gray-600 border-gray-500 text-white shadow-sm p-2 text-sm" placeholder="Reactivo/No Reactivo"></div>
+                                            <div><label for="chagas_serologia_nino" class="text-sm font-medium text-gray-300">Serología Niño >6m (HAI/ELISA)</label><input type="text" id="chagas_serologia_nino" class="mt-1 w-full rounded-md bg-gray-600 border-gray-500 text-white shadow-sm p-2 text-sm" placeholder="Título 1/128"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-orange-300">Dengue</h4>
+                                        <div class="space-y-2 mt-2">
+                                             <div><label for="dengue_pcr_ns1" class="text-sm font-medium text-gray-300">Antígeno NS1 / RT-PCR</label><input type="text" id="dengue_pcr_ns1" class="mt-1 w-full rounded-md bg-gray-600 border-gray-500 text-white shadow-sm p-2 text-sm" placeholder="Positivo/Negativo"></div>
+                                             <div><label for="dengue_serologia_igm" class="text-sm font-medium text-gray-300">Serología IgM</label><input type="text" id="dengue_serologia_igm" class="mt-1 w-full rounded-md bg-gray-600 border-gray-500 text-white shadow-sm p-2 text-sm" placeholder="Reactivo/No Reactivo"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                         <label for="outros_dados" class="block text-sm font-medium text-gray-300">Otros datos relevantes (signos, síntomas, comorbilidades)</label>
+                         <textarea id="outros_dados" rows="3" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2" placeholder="Ej: Paciente de 45 años, masculino, con fiebre hace 3 días y tos productiva. Residente de zona endémica para Chagas."></textarea>
+                    </div>
+
+                    <div id="action-buttons" class="mt-8 flex flex-col md:flex-row justify-center items-center gap-4">
+                        <button type="button" id="generate-report-btn" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                            Generar Reporte de Análisis
+                        </button>
+                        <button type="button" id="print-report-btn" class="w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-300" style="display: none;">
+                            Imprimir Reporte
+                        </button>
+                        <button type="button" id="install-app-btn" class="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-300" style="display: none;">
+                            Instalar App
+                        </button>
+                        <button type="button" id="clear-form-btn" class="w-full md:w-auto bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gray-300">
+                            Limpiar Formulario
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Seção de Carregamento -->
+            <div id="loading-section" class="text-center my-10" style="display: none;">
+                <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-700 h-24 w-24 mx-auto"></div>
+                <p class="mt-4 text-lg text-gray-400">Analizando datos... Por favor, espere.</p>
+            </div>
+            
+            <!-- Seção de Mensagem de Erro -->
+            <div id="error-message" class="hidden bg-red-900 bg-opacity-50 border border-red-500 text-red-300 px-4 py-3 rounded-lg relative my-6" role="alert">
+                <strong class="font-bold">¡Ocurrió un error!</strong>
+                <span id="error-content" class="block sm:inline">No fue posible generar el reporte. Por favor, intente nuevamente.</span>
+            </div>
+
+
+            <!-- Seção do Relatório Gerado -->
+            <div id="report-output" class="mt-10">
+                <!-- 1. Aviso Ético -->
+                <div id="aviso-etico-section" class="report-section bg-yellow-900 bg-opacity-50 border-l-4 border-yellow-500 text-yellow-300 p-4 rounded-r-lg mb-6">
+                    <h3 class="font-bold text-lg text-yellow-200">⚠️ Aviso Ético y de Seguridad</h3>
+                    <p id="aviso-etico-content" class="mt-2 text-sm">El contenido generado es para fines de apoyo educacional e informativo, no sustituyendo la evaluación y el juicio clínico de un profesional de salud calificado. La decisión final sobre diagnóstico y tratamiento es de responsabilidad del médico tratante. Utilice esta herramienta con discernimiento.</p>
+                </div>
+                
+                <!-- 2. Tabela Resumo -->
+                <div id="tabla-resumen-section" class="report-section bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+                    <h2 class="text-2xl font-bold text-white mb-4">Tabla Resumen</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-700">
+                            <thead class="bg-gray-700">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Parámetro</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Valor</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Referencia</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Interpretación</th>
+                                </tr>
+                            </thead>
+                            <tbody id="summary-table-body" class="bg-gray-800 divide-y divide-gray-700">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 3. Explicação Sencilla para el Paciente -->
+                 <div id="explicacion-sencilla-section" class="report-section bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+                    <h2 class="text-2xl font-bold text-blue-400 mb-4">Para el Paciente: ¿Qué significan sus exámenes?</h2>
+                    <div id="explicacion-sencilla-content" class="prose max-w-none text-gray-300"></div>
+                </div>
+
+                <!-- 4. Reporte Detallado -->
+                <div id="reporte-detallado-section" class="report-section bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+                    <h2 class="text-2xl font-bold text-white mb-4">Reporte Detallado (Técnico)</h2>
+                    <div id="reporte-detallado-content" class="space-y-4 prose max-w-none text-gray-300"></div>
+                </div>
+
+                <!-- 5. Explicación Técnica -->
+                <div id="explicacion-tecnica-section" class="report-section bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+                    <h2 class="text-2xl font-bold text-white mb-4">Glosario y Explicación Técnica</h2>
+                    <div id="explicacion-tecnica-content" class="prose max-w-none text-gray-300"></div>
+                </div>
+                
+                <!-- 6. Referencias -->
+                <div id="referencias-section" class="report-section bg-gray-800 p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold text-white mb-4">Referencias</h2>
+                    <div id="referencias-content" class="prose max-w-none text-sm text-gray-400"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer id="main-footer" class="text-center mt-12 text-sm text-gray-500">
+            <p>Desarrollado como una herramienta de apoyo para profesionales en misión.</p>
+            <p>&copy; 2024. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script type="module">
+        // --- Registro do Service Worker para PWA ---
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').then(registration => {
+                    console.log('ServiceWorker registrado com sucesso: ', registration.scope);
+                }).catch(error => {
+                    console.log('Falha no registro do ServiceWorker: ', error);
+                });
+            });
+        }
+        
+        // --- Lógica para o botão de instalação ---
+        const installBtn = document.getElementById('install-app-btn');
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'block';
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to the install prompt: ${outcome}`);
+                deferredPrompt = null;
+                installBtn.style.display = 'none';
+            }
+        });
+
+        // --- Lógica principal da aplicação ---
+        const generateBtn = document.getElementById('generate-report-btn');
+        const printBtn = document.getElementById('print-report-btn');
+        const clearBtn = document.getElementById('clear-form-btn');
+        const labForm = document.getElementById('lab-form');
+        
+        const inputSection = document.getElementById('input-section');
+        const loadingSection = document.getElementById('loading-section');
+        const errorMessage = document.getElementById('error-message');
+        const reportSections = document.querySelectorAll('.report-section');
+
+        const showSection = (section, show) => {
+            if (section) section.style.display = show ? 'block' : 'none';
+        };
+
+        generateBtn.addEventListener('click', async () => {
+            showSection(inputSection, false);
+            showSection(errorMessage, false);
+            reportSections.forEach(section => showSection(section, false));
+            showSection(loadingSection, true);
+            showSection(printBtn, false);
+            
+            const labData = {
+                hemoglobina: document.getElementById('hemoglobina').value,
+                hematocrito: document.getElementById('hematocrito').value,
+                hematies: document.getElementById('hematies').value,
+                vcm: document.getElementById('vcm').value,
+                hcm: document.getElementById('hcm').value,
+                leucocitos: document.getElementById('leucocitos').value,
+                neutrofilos: document.getElementById('neutrofilos').value,
+                linfocitos: document.getElementById('linfocitos').value,
+                monocitos: document.getElementById('monocitos').value,
+                eosinofilos: document.getElementById('eosinofilos').value,
+                basofilos: document.getElementById('basofilos').value,
+                cayados: document.getElementById('cayados').value,
+                plaquetas: document.getElementById('plaquetas').value,
+                tp: document.getElementById('tp').value,
+                inr: document.getElementById('inr').value,
+                glicose: document.getElementById('glicose').value,
+                ureia: document.getElementById('ureia').value,
+                creatinina: document.getElementById('creatinina').value,
+                ast_tgo: document.getElementById('ast_tgo').value,
+                alt_tgp: document.getElementById('alt_tgp').value,
+                fa: document.getElementById('fa').value,
+                bilirrubina_total: document.getElementById('bilirrubina_total').value,
+                sodio: document.getElementById('sodio').value,
+                potassio: document.getElementById('potassio').value,
+                pcr: document.getElementById('pcr').value,
+                chagas_micrometodo: document.getElementById('chagas_micrometodo').value,
+                chagas_serologia_materna: document.getElementById('chagas_serologia_materna').value,
+                chagas_serologia_nino: document.getElementById('chagas_serologia_nino').value,
+                dengue_pcr_ns1: document.getElementById('dengue_pcr_ns1').value,
+                dengue_serologia_igm: document.getElementById('dengue_serologia_igm').value,
+                outros_dados: document.getElementById('outros_dados').value,
+            };
+
+            const dataString = Object.entries(labData)
+                .filter(([_, value]) => value && value.trim() !== '')
+                .map(([key, value]) => `- ${key.replace(/_/g, ' ')}: ${value}`)
+                .join('\n');
+            
+            const referenceText = `
+                ### HEMATOLOGÍA GENERAL
+                - **HEMOGLOBINA (Hb) 12-18 g/dl**: > Leucocitosis, hiperlipidemia, fumadores, hemoconcentración, policitemia. | < ANEMIA: Déficit de hierro, aplasia medular, déficit de B12, hemólisis, hemorragias.
+                - **HEMATOCRITO (Ht) 36-50%**: > Hemoconcentración, policitemia. | < ANEMIA, hemodilución.
+                - **LEUCOCITOS 4k-11k/mm³**: > Leucocitosis: Infección, inflamación, leucemias. | < Leucopenia: Dengue, quimio, sepsis, autoinmune.
+                - **PLAQUETAS 150k-400k/mm³**: > Trombocitosis: Reactiva a infección/inflamación, neoplasia. | < Trombocitopenia: Dengue, PTI, Lupus, fármacos, hiperesplenismo.
+
+                ### BIOQUÍMICA GENERAL
+                - **CREATININA 0.6-1.4 mg/dl**: > Insuficiencia Renal, < TFG.
+                - **UREA 20-45 mg/dl**: > Dieta hiperproteica, hemorragia TGI, sepsis. | < Falla renal.
+                - **TGO/AST 10-40 U/L**: > Daño hepático, pancreatitis aguda, IAM, cirrosis, alcoholismo, rabdomiólisis.
+                - **TGP/ALT 10-40 U/L**: > Hepatitis (aguda, viral), autoinmune, fármacos. Es más específica del hígado.
+                
+                ### ANÁLISIS ESPECÍFICO PARA BOLIVIA (Basado en Manuales)
+
+                #### CHAGAS
+                - **Diagnóstico en Embarazadas**: Tamizaje serológico (HAI o ELISA) es crucial. Si es (+), no tratar durante el embarazo.
+                - **Diagnóstico en Recién Nacido (RN) de madre (+) (0-6 meses)**: El diagnóstico se basa en el **MICROMÉTODO** (observación directa del parásito en sangre de cordón o periférica).
+                  - **Micrométodo Positivo**: Confirma Chagas Congénito Agudo. Iniciar tratamiento (Benznidazol).
+                  - **Micrométodo Negativo**: Repetir antes de los 6 meses. Si sigue negativo, proceder a serología.
+                - **Diagnóstico en Niño > 6-12 meses**: Se realiza control serológico (HAI/ELISA).
+                  - **Serología Positiva (>1/128)**: Confirma Chagas Congénito. Iniciar tratamiento.
+                  - **Serología Débilmente Positiva (1/16-1/64)**: Repetir en 3 meses. La persistencia o aumento confirma la infección.
+                  - **Serología Negativa**: Niño sano.
+                - **Tratamiento en niños < 1 año**: Benznidazol 7 mg/kg/día por 1 semana, luego ajustar a 10 mg/kg/día por 30 días. La curación es cercana al 100%.
+
+                #### DENGUE
+                - **Fase Febril (2-7 días)**: Fiebre alta, cefalea, dolor retro-ocular, mialgias, artralgias, exantema. Laboratorio: Leucopenia, puede haber plaquetopenia leve.
+                - **Clasificación**: Se clasifica en "Dengue sin signos de alarma" (DSSA), "Dengue con signos de alarma" (DCSA) y "Dengue Grave" (DG).
+                - **Signos de Alarma (indican posible evolución a Dengue Grave)**: Dolor abdominal intenso y continuo, vómitos persistentes, acumulación de líquidos (ascitis, derrame pleural), sangrado de mucosas, letargo, hepatomegalia >2cm, aumento progresivo del hematocrito con caída de plaquetas.
+                - **Dengue Grave**: Shock por extravasación de plasma, sangrado grave, compromiso severo de órganos (hepatitis con AST/ALT >= 1000, encefalitis, miocarditis).
+                - **Diagnóstico de Laboratorio**:
+                  - **Fase Aguda (1-5 días)**: Detección del virus o antígenos. **Antígeno NS1** o **RT-PCR** son las pruebas de elección.
+                  - **Fase Convaleciente (>5-6 días)**: Detección de anticuerpos. **ELISA para IgM** es la prueba principal.
+                - **Manejo**: Principalmente reposo e hidratación oral abundante en DSSA. Hospitalización y fluidoterapia IV en DCSA y DG. **Evitar AINEs (aspirina, ibuprofeno, diclofenaco)** por riesgo de sangrado. El paracetamol es el antipirético de elección.
+            `;
+
+            const promptText = `
+                Por favor, actúa como un médico especialista en patología clínica. Analiza los siguientes resultados de exámenes de laboratorio y los datos clínicos.
+                Usa tu conocimiento experto y, FUNDAMENTALMENTE, la tabla de referencia detallada que te proporciono a continuación para guiar tu interpretación y las posibles causas. El reporte debe ser en español.
+
+                ## Datos del Paciente para Analizar:
+                ${dataString}
+                
+                ## Base de Conocimiento de Referencia (General y Enfocada en Bolivia):
+                ${referenceText}
+
+                La respuesta DEBE seguir estrictamente el formato JSON especificado en el schema. Sé completo, detallado y basa tus "causas posibles" en la base de conocimiento provista.
+            `;
+            
+            const schema = {
+                type: "OBJECT",
+                properties: {
+                    tablaResumen: {
+                        type: "ARRAY",
+                        description: "Tabla con los resultados, valores de referencia y una interpretación corta para cada uno.",
+                        items: {
+                            type: "OBJECT",
+                            properties: {
+                                parametro: { type: "STRING" },
+                                valor: { type: "STRING" },
+                                referencia: { type: "STRING" },
+                                interpretacion: { type: "STRING" }
+                            },
+                             required: ["parametro", "valor", "referencia", "interpretacion"]
+                        }
+                    },
+                    explicacionSencilla: {
+                        type: "STRING",
+                        description: "Una explicación clara y simple para un paciente laico, en formato de párrafos. Usar un lenguaje empático y tranquilizador, evitando jerga."
+                    },
+                     reporteDetallado: {
+                        type: "OBJECT",
+                        description: "Análisis técnico completo para el profesional de la salud.",
+                        properties: {
+                            interpretacion: { type: "STRING", description: "Interpretación técnica integrada de todos los hallazgos." },
+                            conductas: { type: "STRING", description: "Sugerencias de conductas y próximos pasos (ej: exámenes adicionales, monitoreo)." },
+                            alertas: { type: "STRING", description: "Puntos de atención y señales de alerta críticos que requieren acción inmediata." },
+                            hipotesis: { type: "STRING", description: "Principales hipótesis diagnósticas con base en los hallazgos." },
+                            diagnosticosDiferenciales: { type: "STRING", description: "Lista de posibles diagnósticos diferenciales a considerar." },
+                            causas: { type: "STRING", description: "Posibles causas para las alteraciones encontradas, basadas en la tabla de referencia provista."}
+                        },
+                        required: ["interpretacion", "conductas", "alertas", "hipotesis", "diagnosticosDiferenciales", "causas"]
+                    },
+                    explicacionTecnica: {
+                        type: "STRING",
+                        description: "Un glosario explicando los términos médicos y la fisiopatología detrás de las alteraciones para referencia del profesional."
+                    },
+                    referencias: {
+                        type: "STRING",
+                        description: "Mencionar que el análisis se basa en la tabla de referencia proporcionada y en guías de patología clínica estándar, como las de la OMS/OPS y los manuales nacionales de Bolivia."
+                    }
+                },
+                required: ["tablaResumen", "explicacionSencilla", "reporteDetallado", "explicacionTecnica", "referencias"]
+            };
+
+            try {
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: promptText }] }],
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: schema
+                    }
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    let errorMsg = `Error de API: ${response.status}.`;
+                    try {
+                        const errorBody = await response.json();
+                        errorMsg = errorBody.error?.message || JSON.stringify(errorBody);
+                    } catch (e) {
+                        errorMsg += ' No se pudo obtener más detalles del error.';
+                    }
+                    throw new Error(errorMsg);
+                }
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts) {
+                    const reportData = JSON.parse(result.candidates[0].content.parts[0].text);
+                    displayReport(reportData);
+                } else {
+                     throw new Error("La respuesta de la API fue inválida o vacía.");
+                }
+            } catch (error) {
+                console.error("Error al generar reporte:", error);
+                document.getElementById('error-content').textContent = error.message;
+                showSection(errorMessage, true);
+            } finally {
+                showSection(loadingSection, false);
+                showSection(inputSection, true);
+            }
+        });
+
+        // Limpiar el formulario
+        clearBtn.addEventListener('click', () => {
+            labForm.reset();
+            reportSections.forEach(section => showSection(section, false));
+            showSection(printBtn, false);
+            showSection(installBtn, deferredPrompt ? 'block' : 'none'); // Mostra o botão se a instalação estiver pendente
+            window.scrollTo(0, 0);
+        });
+
+        // Imprimir el reporte
+        printBtn.addEventListener('click', () => {
+            window.print();
+        });
+
+
+        function displayReport(data) {
+            const tableBody = document.getElementById('summary-table-body');
+            tableBody.innerHTML = '';
+            if (data.tablaResumen) {
+                data.tablaResumen.forEach(item => {
+                    let rowClass = 'text-gray-300';
+                    const interp = item.interpretacion.toLowerCase();
+                    if (interp.includes('alto') || interp.includes('aumentado') || interp.includes('elevado') || interp.includes('positiv') || interp.includes('reactivo') || interp.includes('>')) {
+                        rowClass = 'text-red-400';
+                    } else if (interp.includes('bajo') || interp.includes('disminuido') || interp.includes('<')) {
+                        rowClass = 'text-blue-400';
+                    }
+                    
+                    const row = `<tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-200">${item.parametro}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm ${rowClass}">${item.valor}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">${item.referencia}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium ${rowClass}">${item.interpretacion}</td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                });
+                showSection(document.getElementById('tabla-resumen-section'), true);
+            }
+
+            document.getElementById('explicacion-sencilla-content').innerHTML = `<p>${(data.explicacionSencilla || '').replace(/\n/g, '</p><p>')}</p>`;
+            showSection(document.getElementById('explicacion-sencilla-section'), true);
+
+            const reporteDetallado = data.reporteDetallado || {};
+            const reporteContent = document.getElementById('reporte-detallado-content');
+            reporteContent.innerHTML = `
+                <h4 class="text-gray-100"><strong>Interpretación Integrada:</strong></h4><p>${(reporteDetallado.interpretacion || '').replace(/\n/g, '<br>')}</p>
+                <h4 class="text-gray-100"><strong>Sugerencias de Conducta:</strong></h4><p>${(reporteDetallado.condutas || '').replace(/\n/g, '<br>')}</p>
+                <h4 class="text-gray-100"><strong>Señales de Alerta:</strong></h4><p>${(reporteDetallado.alertas || '').replace(/\n/g, '<br>')}</p>
+                <h4 class="text-gray-100"><strong>Hipótesis Diagnósticas:</strong></h4><p>${(reporteDetallado.hipotesis || '').replace(/\n/g, '<br>')}</p>
+                <h4 class="text-gray-100"><strong>Diagnósticos Diferenciales:</strong></h4><p>${(reporteDetallado.diagnosticosDiferenciales || '').replace(/\n/g, '<br>')}</p>
+                <h4 class="text-gray-100"><strong>Causas Posibles (según referencia):</strong></h4><p>${(reporteDetallado.causas || '').replace(/\n/g, '<br>')}</p>
+            `;
+            showSection(document.getElementById('reporte-detallado-section'), true);
+            
+            document.getElementById('explicacion-tecnica-content').innerHTML = `<p>${(data.explicacionTecnica || '').replace(/\n/g, '</p><p>')}</p>`;
+            showSection(document.getElementById('explicacion-tecnica-section'), true);
+            
+            document.getElementById('referencias-content').innerHTML = `<p>${(data.referencias || '').replace(/\n/g, '<br>')}</p>`;
+            showSection(document.getElementById('referencias-section'), true);
+
+            showSection(document.getElementById('aviso-etico-section'), true);
+            showSection(printBtn, true);
+
+            document.getElementById('report-output').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
+
