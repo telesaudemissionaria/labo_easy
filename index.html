@@ -28,10 +28,20 @@
         .tab-content.active {
             display: block;
         }
-        .tab-btn.active {
-            border-bottom-color: #0d9488; /* teal-600 */
-            color: #0d9488;
+        /* New styles for alternating tab colors */
+        .tab-btn.active.black-tab {
+            border-bottom-color: #1a202c; /* black */
+            color: #1a202c;
             font-weight: 600;
+        }
+        .tab-btn.active.red-tab {
+            border-bottom-color: #dc2626; /* red-600 */
+            color: #dc2626;
+            font-weight: 600;
+        }
+        .tab-btn.inactive {
+            color: #64748b; /* slate-500 */
+            border-bottom-color: transparent;
         }
         @media print {
             body {
@@ -190,11 +200,11 @@
                 <!-- Abas de Navegação -->
                 <div class="tab-buttons-container border-b border-gray-200 mb-4">
                     <nav class="tab-buttons -mb-px flex space-x-6" aria-label="Tabs">
-                        <button class="tab-btn active whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-tab="tabla-resumen-section">Tabla Resumen</button>
-                        <button class="tab-btn whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="explicacion-sencilla-section">Para el Paciente</button>
-                        <button class="tab-btn whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="reporte-detallado-section">Reporte Detallado</button>
-                        <button class="tab-btn whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="explicacion-tecnica-section">Glosario Técnico</button>
-                        <button class="tab-btn whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="referencias-section">Referencias</button>
+                        <button class="tab-btn active black-tab whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-tab="tabla-resumen-section">Tabla Resumen</button>
+                        <button class="tab-btn inactive whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-tab="reporte-detallado-section">Reporte Detallado</button>
+                        <button class="tab-btn inactive whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-tab="diagnostico-diferencial-section">Diagnóstico Diferencial</button>
+                        <button class="tab-btn inactive whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-tab="explicacion-tecnica-section">Glosario Técnico</button>
+                        <button class="tab-btn inactive whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm" data-tab="referencias-section">Referencias</button>
                     </nav>
                 </div>
                 
@@ -207,7 +217,7 @@
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Parámetro</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Valor</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Referência</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Referencia</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Interpretación</th>
                                 </tr>
                             </thead>
@@ -216,14 +226,16 @@
                     </div>
                 </div>
                 
-                 <div id="explicacion-sencilla-section" class="tab-content">
-                    <h2 class="text-xl font-bold text-gray-900 mb-4">Para el Paciente: ¿Qué significan sus exámenes?</h2>
-                    <div id="explicacion-sencilla-content" class="prose max-w-none text-gray-700"></div>
-                </div>
+                <!-- Removed "Para el Paciente" content section -->
 
                 <div id="reporte-detallado-section" class="tab-content">
                     <h2 class="text-xl font-bold text-gray-900 mb-4">Reporte Detallado (Técnico)</h2>
                     <div id="reporte-detallado-content" class="space-y-4 prose max-w-none text-gray-700"></div>
+                </div>
+
+                <div id="diagnostico-diferencial-section" class="tab-content">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4">Diagnóstico Diferencial</h2>
+                    <div id="diagnostico-diferencial-content" class="prose max-w-none text-gray-700"></div>
                 </div>
 
                 <div id="explicacion-tecnica-section" class="tab-content">
@@ -239,8 +251,8 @@
         </main>
 
         <footer id="main-footer" class="text-center mt-12 text-sm text-gray-500">
-            <p>Desarrollado como una herramienta de apoio para profissionais em missão.</p>
-            <p>&copy; 2024. Todos los derechos reservados.</p>
+            <p>Desenvolvido como uma ferramenta de apoio para profissionais em missão.</p>
+            <p>&copy; 2024. Todos os direitos reservados.</p>
             <p class="mt-4 text-xs text-red-700">
                 As informações neste aplicativo não têm a intenção de ser aconselhamento profissional nem têm a intenção de substituir uma consulta pessoal com um médico, farmacêutico ou outro profissional de saúde qualificado. O leitor não deve desconsiderar aconselhamento médico nem adiar a busca por aconselhamento médico devido a alguma informação encontrada neste aplicativo.
             </p>
@@ -279,7 +291,7 @@
         // --- Lógica principal da aplicação ---
         const generateBtn = document.getElementById('generate-report-btn');
         const printBtn = document.getElementById('print-report-btn');
-        const whatsappShareBtn = document.getElementById('whatsapp-share-btn'); // Get the new WhatsApp button
+        const whatsappShareBtn = document.getElementById('whatsapp-share-btn');
         const clearBtn = document.getElementById('clear-form-btn');
         const labForm = document.getElementById('lab-form');
         
@@ -296,7 +308,7 @@
             showSection(reportOutput, false);
             showSection(loadingSection, true);
             showSection(printBtn, false);
-            showSection(whatsappShareBtn, false); // Hide WhatsApp share button initially
+            showSection(whatsappShareBtn, false);
             
             const labData = {
                 hemoglobina: document.getElementById('hemoglobina').value,
@@ -307,6 +319,14 @@
                 creatinina: document.getElementById('creatinina').value,
                 ast_tgo: document.getElementById('ast_tgo').value,
                 alt_tgp: document.getElementById('alt_tgp').value,
+                neutrofilos: document.getElementById('neutrofilos').value,
+                linfocitos: document.getElementById('linfocitos').value,
+                monocitos: document.getElementById('monocitos').value,
+                eosinofilos: document.getElementById('eosinofilos').value,
+                cayados: document.getElementById('cayados').value,
+                hematies: document.getElementById('hematies').value,
+                vcm: document.getElementById('vcm').value,
+                hcm: document.getElementById('hcm').value,
                 chagas_micrometodo: document.getElementById('chagas_micrometodo').value,
                 chagas_serologia_materna: document.getElementById('chagas_serologia_materna').value,
                 chagas_serologia_nino: document.getElementById('chagas_serologia_nino').value,
@@ -341,25 +361,131 @@
                 - Diagnóstico Convaleciente (>5 días): Serología IgM.
             `;
             
+            // Content for 'Para el Paciente' (exact text as provided by user in image_d887f5.png)
+            const folhetoPacienteContent = `
+Folheto do Paciente
+Anemia
+O que é?
+Anemia é uma condição na qual o corpo não tem glóbulos vermelhos saudáveis em quantidade suficiente para transportar oxigénio adequadamente para os tecidos. Isso pode levar a sintomas como fadiga e fraqueza.
+Sinais/sintomas comuns
+Os sintomas comuns da anemia incluem fadiga, fraqueza, palidez, falta de ar, tonturas, dores de cabeça e mãos e pés frios. Algumas pessoas podem também sentir palpitações cardíacas e dificuldade de concentração.
+Causas ou fatores de risco
+A anemia pode ser causada por deficiência de ferro na dieta, perda de sangue (devido a menstruação intensa, úlceras, cirurgias, etc.), doenças crónicas (como doença renal, doenças inflamatórias), problemas na medula óssea ou fatores genéticos. Uma dieta pobre em ferro, gravidez e histórico familiar de anemia também são fatores de risco.
+Possíveis complicações
+Se não tratada, a anemia pode levar a complicações como fadiga extrema que impede a realização de tarefas diárias, problemas cardíacos (como arritmias ou insuficiência cardíaca), complicações na gravidez e aumento da suscetibilidade a infeções.
+Opções de tratamento
+O tratamento para a anemia depende da causa e da gravidade da condição. Pode incluir suplementos de ferro, mudanças na dieta (aumentar o consumo de alimentos ricos em ferro), transfusões de sangue, medicamentos para tratar a causa subjacente ou, em casos raros, transplante de medula óssea.
+Quando procurar ajuda
+Procure ajuda médica se sentir fadiga persistente, falta de ar, tonturas frequentes, ou outros sintomas de anemia. É importante obter um diagnóstico preciso e um plano de tratamento adequado para evitar complicações.
+
+Disclaimer
+Este folheto é apenas para fins informativos gerais e não substitui o aconselhamento médico profissional.`;
+
+            // This variable is now intentionally empty, as the LLM will generate its content based on lab data
+            const diagnosticoDiferencialCompletoContent = ``; 
+
             const promptText = `
-                Actúa como un médico especialista em patología clínica. Analiza los siguientes resultados de laboratorio y datos clínicos.
-                Usa tu conocimiento y, FUNDAMENTALMENTE, la base de referencia que te proporciono para guiar tu interpretación. El reporte debe ser en español.
-                ## Datos del Paciente:
-                ${dataString}
-                ## Base de Conocimiento de Referencia:
-                ${referenceText}
-                La respuesta DEBE seguir el formato JSON del schema. Sé completo e basa tus "causas posibles" en la referencia.`;
-            
+Actúa como un médico especialista en patología clínica. Analiza los siguientes resultados de laboratorio y datos clínicos.
+Usa tu conocimiento y, FUNDAMENTALMENTE, la base de referencia que te proporciono para guiar tu interpretación. El reporte debe ser en español.
+
+## Datos del Paciente:
+${dataString}
+
+## Base de Conocimiento de Referência:
+${referenceText}
+
+## Formato de Saída (JSON):
+
+Seu objeto JSON DEVE conter as seguintes chaves e estruturas, preenchendo-as com sua análise ou com os textos exatos solicitados.
+
+1.  **"tablaResumen"**: Um ARRAY de objetos. Cada objeto deve ter as chaves "parametro", "valor", "referencia", "interpretacion".
+
+2.  **"reporteDetallado"**: Um OBJECT com as seguintes chaves, que representam a "Avaliação e Planejamento". Gere o conteúdo para cada campo com base nos dados fornecidos do paciente e na base de conhecimento. Se um campo não puder ser preenchido com base nos dados, deixe-o em branco ou indique "Não aplicável".
+    * **"impressaoClinica"**: STRING - Sua avaliação clínica inicial e impressão geral do caso.
+    * **"doencaPulmonar"**: OBJECT - Análise e planos para problemas pulmonares.
+        * **"titulo"**: STRING - Use "Doença Pulmonar Intersticial vs. Malignidade Pulmonar".
+        * **"dx"**: STRING - Diagnósticos (Dx) sugeridos para este problema.
+        * **"tx"**: STRING - Tratamentos (Tx) ou manejos sugeridos para este problema.
+    * **"hipoxemia"**: OBJECT - Análise e planos para hipoxemia.
+        * **"titulo"**: STRING - Use "Hipoxemia".
+        * **"dx"**: STRING - Diagnósticos (Dx) sugeridos para este problema.
+        * **"tx"**: STRING - Tratamentos (Tx) ou manejos sugeridos para este problema.
+    * **"problemasCronicos"**: OBJECT - Análise e planos para problemas crônicos.
+        * **"hiperlipidemia"**: STRING - Análise e conduta para Hiperlipidemia.
+        * **"profilaxiaTVP"**: STRING - Análise e conduta para Profilaxia TVP.
+    * **"interpretacionIntegrada"**: STRING - Uma interpretação abrangente dos achados (se aplicável).
+    * **"alertas"**: STRING - Sinais de alerta importantes (se aplicável).
+    * **"hipotesis"**: STRING - Hipóteses diagnósticas mais prováveis (se aplicável).
+    * **"causas"**: STRING - Causas possíveis, estritamente baseadas na "Base de Conhecimento de Referência" fornecida (se aplicável).
+
+3.  **"explicacionTecnica"**: Uma STRING para o glossário técnico, como nas versões anteriores.
+
+4.  **"diagnosticoDiferencialCompleto"**: Uma STRING que contenha a discussão de caso e os diagnósticos diferenciais. Esta seção DEVE ser gerada SOMENTE com base nos 'Dados do Paciente' e na 'Base de Conhecimento de Referência' fornecidos. Se os dados forem insuficientes para uma discussão detalhada, declare claramente 'Dados insuficientes para um diagnóstico diferencial detalhado com base nos exames de laboratório fornecidos.' Não invente informações ou cenários clínicos não suportados pelos dados presentes.
+
+5.  **"referencias"**: Uma STRING contendo o texto das referências fornecidas.
+`;
+
             const schema = {
                 type: "OBJECT",
                 properties: {
-                    tablaResumen: { type: "ARRAY", items: { type: "OBJECT", properties: { parametro: { type: "STRING" }, valor: { type: "STRING" }, referencia: { type: "STRING" }, interpretacion: { type: "STRING" } }, required: ["parametro", "valor", "referencia", "interpretacion"] } },
-                    explicacionSencilla: { type: "STRING" },
-                    reporteDetallado: { type: "OBJECT", properties: { interpretacion: { type: "STRING" }, conductas: { type: "STRING" }, alertas: { type: "STRING" }, hipotesis: { type: "STRING" }, diagnosticosDiferenciales: { type: "STRING" }, causas: { type: "STRING" } }, required: ["interpretacion", "conductas", "alertas", "hipotesis", "diagnosticosDiferenciales", "causas"] },
+                    tablaResumen: {
+                        type: "ARRAY",
+                        items: {
+                            type: "OBJECT",
+                            properties: {
+                                parametro: { type: "STRING" },
+                                valor: { type: "STRING" },
+                                referencia: { type: "STRING" },
+                                interpretacion: { type: "STRING" }
+                            },
+                            required: ["parametro", "valor", "referencia", "interpretacion"]
+                        }
+                    },
+                    // Removed explicacionSencilla as a direct property, it will now be added dynamically in JS based on `folhetoPacienteContent`
+                    reporteDetallado: { // New structure for reporteDetallado
+                        type: "OBJECT",
+                        properties: {
+                            impressaoClinica: { type: "STRING" },
+                            doencaPulmonar: {
+                                type: "OBJECT",
+                                properties: {
+                                    titulo: { type: "STRING" },
+                                    dx: { type: "STRING" },
+                                    tx: { type: "STRING" }
+                                },
+                                required: ["titulo", "dx", "tx"]
+                            },
+                            hipoxemia: {
+                                type: "OBJECT",
+                                properties: {
+                                    titulo: { type: "STRING" },
+                                    dx: { type: "STRING" },
+                                    tx: { type: "STRING" }
+                                },
+                                required: ["titulo", "dx", "tx"]
+                            },
+                            problemasCronicos: {
+                                type: "OBJECT",
+                                properties: {
+                                    hiperlipidemia: { type: "STRING" },
+                                    profilaxiaTVP: { type: "STRING" }
+                                },
+                                required: ["hiperlipidemia", "profilaxiaTVP"]
+                            },
+                            interpretacionIntegrada: { type: "STRING" }, // Kept for general interpretation
+                            alertas: { type: "STRING" }, // Kept for general alerts
+                            hipotesis: { type: "STRING" }, // Kept for general hypothesis
+                            causas: { type: "STRING" } // Kept for general causes based on reference
+                        },
+                        // Made these optional in required for flexibility
+                        required: ["impressaoClinica", "doencaPulmonar", "hipoxemia", "problemasCronicos", "interpretacionIntegrada", "alertas", "hipotesis", "causas"]
+                    },
                     explicacionTecnica: { type: "STRING" },
+                    diagnosticoDiferencialCompleto: { type: "STRING" }, // Now a string directly from LLM
                     referencias: { type: "STRING" }
                 },
-                required: ["tablaResumen", "explicacionSencilla", "reporteDetallado", "explicacionTecnica", "referencias"]
+                // Removed explicacionSencilla from the top-level required array
+                required: ["tablaResumen", "reporteDetallado", "explicacionTecnica", "diagnosticoDiferencialCompleto", "referencias"]
             };
 
             try {
@@ -372,7 +498,7 @@
                     try {
                         const errorBody = await response.json();
                         errorMsg = errorBody.error?.message || JSON.stringify(errorBody);
-                    } catch (e) { errorMsg += ' No se pudo obtener más detalles del error.'; }
+                    } catch (e) { errorMsg += ' No se pudo obtener más detalhes del error.'; }
                     throw new Error(errorMsg);
                 }
                 const result = await response.json();
@@ -395,13 +521,13 @@
             labForm.reset();
             showSection(reportOutput, false);
             showSection(printBtn, false);
-            showSection(whatsappShareBtn, false); // Hide WhatsApp share button on clear
+            showSection(whatsappShareBtn, false); // Ocultar botão de compartilhamento no WhatsApp
             window.scrollTo(0, 0);
         });
         
         printBtn.addEventListener('click', () => { window.print(); });
 
-        // WhatsApp share functionality
+        // Função de compartilhamento no WhatsApp
         whatsappShareBtn.addEventListener('click', () => {
             const reportContent = document.getElementById('reporte-detallado-content').innerText;
             const message = encodeURIComponent(`Aquí está un resumen de su reporte de laboratorio:\n\n${reportContent}\n\nGenerado por MISSIONARY MEDICAL CARE.`);
@@ -410,20 +536,26 @@
         });
 
 
-        // Lógica de las Abas (Tabs)
+        // Lógica das Abas (Tabs)
         const tabs = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
-        tabs.forEach(tab => {
+        
+        // Define an array of colors to cycle through
+        const tabColors = ['black-tab', 'red-tab']; 
+
+        tabs.forEach((tab, index) => {
             tab.addEventListener('click', () => {
                 const targetId = tab.dataset.tab;
                 const target = document.getElementById(targetId);
 
-                tabs.forEach(t => {
-                    t.classList.remove('active', 'text-teal-600', 'border-teal-600');
-                    t.classList.add('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'border-transparent');
+                tabs.forEach((t, i) => {
+                    t.classList.remove('active', 'black-tab', 'red-tab');
+                    t.classList.add('inactive'); // Add inactive class for default styling
                 });
-                tab.classList.add('active', 'text-teal-600', 'border-teal-600');
-                tab.classList.remove('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'border-transparent');
+
+                // Apply active class and correct color based on index
+                tab.classList.add('active', tabColors[index % tabColors.length]); // Cycle through colors
+                tab.classList.remove('inactive'); // Remove inactive class when active
                 
                 tabContents.forEach(c => c.classList.remove('active'));
                 target.classList.add('active');
@@ -453,33 +585,72 @@
                 });
             }
 
-            document.getElementById('explicacion-sencilla-content').innerHTML = `<p>${(data.explicacionSencilla || '').replace(/\n/g, '</p><p>')}</p>`;
+            // "Para el Paciente" content is removed, so no population here.
+
+            // Populate "Reporte Detallado" content with new structure
             const reporteDetallado = data.reporteDetallado || {};
-            document.getElementById('reporte-detallado-content').innerHTML = `
-                <h3 class="text-lg font-semibold text-gray-800">Interpretación Integrada:</h3><p>${(reporteDetallado.interpretacion || '').replace(/\n/g, '<br>')}</p>
-                <h3 class="text-lg font-semibold text-gray-800">Sugerencias de Conducta:</h3><p>${(reporteDetallado.conductas || '').replace(/\n/g, '<br>')}</p>
-                <h3 class="text-lg font-semibold text-gray-800">Señales de Alerta:</h3><p>${(reporteDetallado.alertas || '').replace(/\n/g, '<br>')}</p>
-                <h3 class="text-lg font-semibold text-gray-800">Hipótesis Diagnósticas:</h3><p>${(reporteDetallado.hipotesis || '').replace(/\n/g, '<br>')}</p>
-                <h3 class="text-lg font-semibold text-gray-800">Diagnósticos Diferenciales:</h3><p>${(reporteDetallado.diagnosticosDiferenciales || '').replace(/\n/g, '<br>')}</p>
-                <h3 class="text-lg font-semibold text-gray-800">Causas Posibles (según referencia):</h3><p>${(reporteDetallado.causas || '').replace(/\n/g, '<br>')}</p>`;
-            document.getElementById('explicacion-tecnica-content').innerHTML = `<p>${(data.explicacionTecnica || '').replace(/\n/g, '</p><p>')}</p`;
+            let detailedReportHtml = '';
+            
+            if (reporteDetallado.impressaoClinica) {
+                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Impressão Clínica:</h3><p>${(reporteDetallado.impressaoClinica || '').replace(/\n/g, '<br>')}</p>`;
+            }
+
+            if (reporteDetallado.doencaPulmonar) {
+                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">${reporteDetallado.doencaPulmonar.titulo}:</h3>`;
+                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Dx:</h4><p>${(reporteDetallado.doencaPulmonar.dx || '').replace(/\n/g, '<br>')}</p>`;
+                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Tx:</h4><p>${(reporteDetallado.doencaPulmonar.tx || '').replace(/\n/g, '<br>')}</p>`;
+            }
+
+            if (reporteDetallado.hipoxemia) {
+                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">${reporteDetallado.hipoxemia.titulo}:</h3>`;
+                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Dx:</h4><p>${(reporteDetallado.hipoxemia.dx || '').replace(/\n/g, '<br>')}</p>`;
+                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Tx:</h4><p>${(reporteDetallado.hipoxemia.tx || '').replace(/\n/g, '<br>')}</p>`;
+            }
+
+            if (reporteDetallado.problemasCronicos) {
+                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Problemas Crônicos:</h3>`;
+                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Hiperlipidemia:</h4><p>${(reporteDetallado.problemasCronicos.hiperlipidemia || '').replace(/\n/g, '<br>')}</p>`;
+                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Profilaxia TVP:</h4><p>${(reporteDetallado.problemasCronicos.profilaxiaTVP || '').replace(/\n/g, '<br>')}</p>`;
+            }
+            // Retained general interpretation, alerts, hypothesis, and causes as they are useful general fields
+            if (reporteDetallado.interpretacionIntegrada) {
+                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Interpretación Integrada:</h3><p>${(reporteDetallado.interpretacionIntegrada || '').replace(/\n/g, '<br>')}</p>`;
+            }
+            if (reporteDetallado.alertas) {
+                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Señales de Alerta:</h3><p>${(reporteDetallado.alertas || '').replace(/\n/g, '<br>')}</p>`;
+            }
+            if (reporteDetallado.hipotesis) {
+                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Hipótesis Diagnósticas:</h3><p>${(reporteDetallado.hipotesis || '').replace(/\n/g, '<br>')}</p>`;
+            }
+            if (reporteDetallado.causas) {
+                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Causas Posibles (según referencia):</h3><p>${(reporteDetallado.causas || '').replace(/\n/g, '<br>')}</p>`;
+            }
+
+            document.getElementById('reporte-detallado-content').innerHTML = detailedReportHtml;
+
+            // Populate "Diagnóstico Diferencial" content directly
+            document.getElementById('diagnostico-diferencial-content').innerHTML = `<p>${(data.diagnosticoDiferencialCompleto || '').replace(/\n/g, '</p><p>')}</p>`;
+
+
+            document.getElementById('explicacion-tecnica-content').innerHTML = `<p>${(data.explicacionTecnica || '').replace(/\n/g, '</p><p>')}</p>`;
             document.getElementById('referencias-content').innerHTML = `<p>${(data.referencias || '').replace(/\n/g, '<br>')}</p>`;
 
-            // Reset tabs to the first one
+            // Reset tabs to the first one with alternating colors
             document.querySelectorAll('.tab-btn').forEach((btn, index) => {
-                btn.classList.toggle('active', index === 0);
-                btn.classList.toggle('text-teal-600', index === 0);
-                btn.classList.toggle('border-teal-600', index === 0);
-                btn.classList.toggle('text-gray-500', index !== 0);
-                btn.classList.toggle('border-transparent', index !== 0);
+                btn.classList.remove('active', 'black-tab', 'red-tab');
+                btn.classList.add('inactive');
             });
+            // Set the first tab as active and apply its corresponding color
+            tabs[0].classList.add('active', tabColors[0]);
+            tabs[0].classList.remove('inactive');
+
             document.querySelectorAll('.tab-content').forEach((content, index) => {
                 content.classList.toggle('active', index === 0);
             });
 
             showSection(reportOutput, true);
             showSection(printBtn, true);
-            showSection(whatsappShareBtn, true); // Show WhatsApp share button after report generation
+            showSection(whatsappShareBtn, true); // Mostrar botão de compartilhamento no WhatsApp
             document.getElementById('report-output').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
