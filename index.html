@@ -207,7 +207,7 @@
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Parámetro</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Valor</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Referencia</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Referência</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Interpretación</th>
                                 </tr>
                             </thead>
@@ -342,7 +342,7 @@
             `;
             
             const promptText = `
-                Actúa como un médico especialista en patología clínica. Analiza los siguientes resultados de laboratorio y datos clínicos.
+                Actúa como un médico especialista em patología clínica. Analiza los siguientes resultados de laboratorio y datos clínicos.
                 Usa tu conocimiento y, FUNDAMENTALMENTE, la base de referencia que te proporciono para guiar tu interpretación. El reporte debe ser en español.
                 ## Datos del Paciente:
                 ${dataString}
@@ -363,9 +363,8 @@
             };
 
             try {
-                const apiKey = ""; // Keep this empty, Canvas will provide it at runtime
-                // Removed ?key=${apiKey} from the apiUrl to allow Canvas to inject the API key
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`;
+                const apiKey = "AIzaSyBSwG0EMH7kvf7DLo4j280wb42uaWmp_ZA"; // API Key inserida diretamente
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`; // URL com a chave da API
                 const payload = { contents: [{ role: "user", parts: [{ text: promptText }] }], generationConfig: { responseMimeType: "application/json", responseSchema: schema } };
                 const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 if (!response.ok) {
