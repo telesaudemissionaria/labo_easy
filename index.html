@@ -239,8 +239,11 @@
         </main>
 
         <footer id="main-footer" class="text-center mt-12 text-sm text-gray-500">
-            <p>Desarrollado como una herramienta de apoyo para profesionales en misión.</p>
+            <p>Desarrollado como una herramienta de apoyo para profesionales en missão.</p>
             <p>&copy; 2024. Todos los derechos reservados.</p>
+            <p class="mt-4 text-xs text-red-700">
+                As informações neste aplicativo não têm a intenção de ser aconselhamento profissional nem têm a intenção de substituir uma consulta pessoal com um médico, farmacêutico ou outro profissional de saúde qualificado. O leitor não deve desconsiderar aconselhamento médico nem adiar a busca por aconselhamento médico devido a alguma informação encontrada neste aplicativo.
+            </p>
         </footer>
     </div>
 
@@ -459,7 +462,7 @@
                 <h3 class="text-lg font-semibold text-gray-800">Hipótesis Diagnósticas:</h3><p>${(reporteDetallado.hipotesis || '').replace(/\n/g, '<br>')}</p>
                 <h3 class="text-lg font-semibold text-gray-800">Diagnósticos Diferenciales:</h3><p>${(reporteDetallado.diagnosticosDiferenciales || '').replace(/\n/g, '<br>')}</p>
                 <h3 class="text-lg font-semibold text-gray-800">Causas Posibles (según referencia):</h3><p>${(reporteDetallado.causas || '').replace(/\n/g, '<br>')}</p>`;
-            document.getElementById('explicacion-tecnica-content').innerHTML = `<p>${(data.explicacionTecnica || '').replace(/\n/g, '</p><p>')}</p>`;
+            document.getElementById('explicacion-tecnica-content').innerHTML = `<p>${(data.explicacionTecnica || '').replace(/\n/g, '</p><p>')}</p`;
             document.getElementById('referencias-content').innerHTML = `<p>${(data.referencias || '').replace(/\n/g, '<br>')}</p>`;
 
             // Reset tabs to the first one
