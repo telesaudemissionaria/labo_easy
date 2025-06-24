@@ -14,7 +14,7 @@
             background-color: #f8fafc; /* bg-slate-50 */
         }
         .loader {
-            border-top-color: #0d9488; /* teal-600 */
+            border-top-color: #dc2626; /* red-600 */ /* Changed from teal-600 to red-600 */
             -webkit-animation: spin 1s linear infinite;
             animation: spin 1s linear infinite;
         }
@@ -93,66 +93,66 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6">
                         
                         <!-- Columna 1: Hematología -->
-                        <div class="space-y-6">
+                        <div class="space-y-6 bg-red-50 p-4 rounded-lg border border-red-200">
                             <div>
-                                <h3 class="text-lg font-semibold mb-3 text-teal-700">Serie Roja</h3>
+                                <h3 class="text-lg font-semibold mb-3 text-red-700">Serie Roja</h3> <!-- Changed to text-red-700 -->
                                 <div class="space-y-3">
-                                    <div><label for="hemoglobina" class="text-sm font-medium text-gray-700">Hemoglobina (g/dL)</label><input type="text" id="hemoglobina" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="12-18"></div>
-                                    <div><label for="hematocrito" class="text-sm font-medium text-gray-700">Hematocrito (%)</label><input type="text" id="hematocrito" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="36-50"></div>
-                                    <div><label for="hematies" class="text-sm font-medium text-gray-700">G. Rojos (x10⁶/µL)</label><input type="text" id="hematies" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="4.0-6.0"></div>
-                                    <div><label for="vcm" class="text-sm font-medium text-gray-700">VCM (fL)</label><input type="text" id="vcm" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="80-93"></div>
-                                    <div><label for="hcm" class="text-sm font-medium text-gray-700">HCM (pg)</label><input type="text" id="hcm" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="27-32"></div>
+                                    <div><label for="hemoglobina" class="text-sm font-medium text-gray-700">Hemoglobina (g/dL)</label><input type="text" id="hemoglobina" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="12-18"></div>
+                                    <div><label for="hematocrito" class="text-sm font-medium text-gray-700">Hematocrito (%)</label><input type="text" id="hematocrito" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="36-50"></div>
+                                    <div><label for="hematies" class="text-sm font-medium text-gray-700">G. Rojos (x10⁶/µL)</label><input type="text" id="hematies" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="4.0-6.0"></div>
+                                    <div><label for="vcm" class="text-sm font-medium text-gray-700">VCM (fL)</label><input type="text" id="vcm" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="80-93"></div>
+                                    <div><label for="hcm" class="text-sm font-medium text-gray-700">HCM (pg)</label><input type="text" id="hcm" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="27-32"></div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Columna 2: Serie Blanca & Coagulación -->
-                        <div class="space-y-6">
+                        <div class="space-y-6 bg-blue-50 p-4 rounded-lg border border-blue-200">
                             <div>
-                                <h3 class="text-lg font-semibold mb-3 text-teal-700">Serie Blanca</h3>
+                                <h3 class="text-lg font-semibold mb-3 text-red-700">Serie Blanca</h3> <!-- Changed to text-red-700 -->
                                  <div class="space-y-3">
-                                    <div><label for="leucocitos" class="text-sm font-medium text-gray-700">Leucocitos (/mm³)</label><input type="text" id="leucocitos" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="4.000-11.000"></div>
-                                    <div><label for="neutrofilos" class="text-sm font-medium text-gray-700">Neutrófilos (%)</label><input type="text" id="neutrofilos" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="45-75"></div>
-                                    <div><label for="linfocitos" class="text-sm font-medium text-gray-700">Linfocitos (%)</label><input type="text" id="linfocitos" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="25-40"></div>
-                                    <div><label for="monocitos" class="text-sm font-medium text-gray-700">Monocitos (%)</label><input type="text" id="monocitos" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="4-10"></div>
-                                    <div><label for="eosinofilos" class="text-sm font-medium text-gray-700">Eosinófilos (%)</label><input type="text" id="eosinofilos" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="0-5"></div>
-                                    <div><label for="cayados" class="text-sm font-medium text-gray-700">Cayados (%)</label><input type="text" id="cayados" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="0-4"></div>
+                                    <div><label for="leucocitos" class="text-sm font-medium text-gray-700">Leucocitos (/mm³)</label><input type="text" id="leucocitos" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="4.000-11.000"></div>
+                                    <div><label for="neutrofilos" class="text-sm font-medium text-gray-700">Neutrófilos (%)</label><input type="text" id="neutrofilos" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="45-75"></div>
+                                    <div><label for="linfocitos" class="text-sm font-medium text-gray-700">Linfocitos (%)</label><input type="text" id="linfocitos" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="25-40"></div>
+                                    <div><label for="monocitos" class="text-sm font-medium text-gray-700">Monocitos (%)</label><input type="text" id="monocitos" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="4-10"></div>
+                                    <div><label for="eosinofilos" class="text-sm font-medium text-gray-700">Eosinófilos (%)</label><input type="text" id="eosinofilos" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="0-5"></div>
+                                    <div><label for="cayados" class="text-sm font-medium text-gray-700">Cayados (%)</label><input type="text" id="cayados" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="0-4"></div>
                                  </div>
                             </div>
                         </div>
                         
                         <!-- Columna 3: Química -->
-                        <div class="space-y-6">
+                        <div class="space-y-6 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
                             <div>
-                                <h3 class="text-lg font-semibold mb-3 text-teal-700">Química y Coagulación</h3>
+                                <h3 class="text-lg font-semibold mb-3 text-red-700">Química y Coagulación</h3> <!-- Changed to text-red-700 -->
                                 <div class="space-y-3">
-                                    <div><label for="glicose" class="text-sm font-medium text-gray-700">Glucemia (mg/dL)</label><input type="text" id="glicose" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="70-125"></div>
-                                    <div><label for="creatinina" class="text-sm font-medium text-gray-700">Creatinina (mg/dL)</label><input type="text" id="creatinina" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="0.6-1.4"></div>
-                                    <div><label for="ast_tgo" class="text-sm font-medium text-gray-700">AST/TGO (U/L)</label><input type="text" id="ast_tgo" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="10-40"></div>
-                                    <div><label for="alt_tgp" class="text-sm font-medium text-gray-700">ALT/TGP (U/L)</label><input type="text" id="alt_tgp" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="10-40"></div>
-                                    <div><label for="plaquetas" class="text-sm font-medium text-gray-700">Plaquetas (/mm³)</label><input type="text" id="plaquetas" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="150k-400k"></div>
+                                    <div><label for="glicose" class="text-sm font-medium text-gray-700">Glucemia (mg/dL)</label><input type="text" id="glicose" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="70-125"></div>
+                                    <div><label for="creatinina" class="text-sm font-medium text-gray-700">Creatinina (mg/dL)</label><input type="text" id="creatinina" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="0.6-1.4"></div>
+                                    <div><label for="ast_tgo" class="text-sm font-medium text-gray-700">AST/TGO (U/L)</label><input type="text" id="ast_tgo" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="10-40"></div>
+                                    <div><label for="alt_tgp" class="text-sm font-medium text-gray-700">ALT/TGP (U/L)</label><input type="text" id="alt_tgp" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="10-40"></div>
+                                    <div><label for="plaquetas" class="text-sm font-medium text-gray-700">Plaquetas (/mm³)</label><input type="text" id="plaquetas" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="150k-400k"></div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Columna 4: Enfermedades Regionales -->
-                        <div class="space-y-6">
+                        <div class="space-y-6 bg-purple-50 p-4 rounded-lg border border-purple-200">
                             <div>
-                                <h3 class="text-lg font-semibold mb-3 text-teal-700">Enf. Regionales (Bolivia)</h3>
+                                <h3 class="text-lg font-semibold mb-3 text-red-700">Enf. Regionales</h3> <!-- Removed "(Bolivia)" and changed to text-red-700 -->
                                 <div class="bg-slate-50 p-4 rounded-lg space-y-4 border border-slate-200">
                                     <div>
                                         <h4 class="font-semibold text-gray-800">Chagas</h4>
                                         <div class="space-y-3 mt-2">
-                                            <div><label for="chagas_micrometodo" class="text-sm font-medium text-gray-700">Micrométodo (RN)</label><input type="text" id="chagas_micrometodo" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="Positivo/Negativo"></div>
-                                            <div><label for="chagas_serologia_materna" class="text-sm font-medium text-gray-700">Serología Materna</label><input type="text" id="chagas_serologia_materna" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="Reactivo/No Reactivo"></div>
-                                            <div><label for="chagas_serologia_nino" class="text-sm font-medium text-gray-700">Serología Niño >6m</label><input type="text" id="chagas_serologia_nino" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="Título 1/128"></div>
+                                            <div><label for="chagas_micrometodo" class="text-sm font-medium text-gray-700">Micrométodo (RN)</label><input type="text" id="chagas_micrometodo" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="Positivo/Negativo"></div>
+                                            <div><label for="chagas_serologia_materna" class="text-sm font-medium text-gray-700">Serología Materna</label><input type="text" id="chagas_serologia_materna" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="Reactivo/No Reactivo"></div>
+                                            <div><label for="chagas_serologia_nino" class="text-sm font-medium text-gray-700">Serología Niño >6m</label><input type="text" id="chagas_serologia_nino" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="Título 1/128"></div>
                                         </div>
                                     </div>
                                     <div>
                                         <h4 class="font-semibold text-gray-800">Dengue</h4>
                                         <div class="space-y-3 mt-2">
-                                             <div><label for="dengue_pcr_ns1" class="text-sm font-medium text-gray-700">Antígeno NS1 / PCR</label><input type="text" id="dengue_pcr_ns1" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="Positivo/Negativo"></div>
-                                             <div><label for="dengue_serologia_igm" class="text-sm font-medium text-gray-700">Serología IgM</label><input type="text" id="dengue_serologia_igm" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="Reactivo/No Reactivo"></div>
+                                             <div><label for="dengue_pcr_ns1" class="text-sm font-medium text-gray-700">Antígeno NS1 / PCR</label><input type="text" id="dengue_pcr_ns1" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="Positivo/Negativo"></div>
+                                             <div><label for="dengue_serologia_igm" class="text-sm font-medium text-gray-700">Serología IgM</label><input type="text" id="dengue_serologia_igm" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="Reactivo/No Reactivo"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -160,13 +160,56 @@
                         </div>
                     </div>
 
+                    <!-- New Row for additional parameters -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 mt-8">
+                        <!-- Columna 5: Gasometria -->
+                        <div class="space-y-6 bg-green-50 p-4 rounded-lg border border-green-200">
+                            <div>
+                                <h3 class="text-lg font-semibold mb-3 text-red-700">Gasometria</h3> <!-- Changed to text-red-700 -->
+                                <div class="space-y-3">
+                                    <div><label for="gasometria_ph" class="text-sm font-medium text-gray-700">pH</label><input type="text" id="gasometria_ph" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="7.35-7.45"></div>
+                                    <div><label for="gasometria_pco2" class="text-sm font-medium text-gray-700">pCO₂ (mmHg)</label><input type="text" id="gasometria_pco2" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="35-45"></div>
+                                    <div><label for="gasometria_hco3" class="text-sm font-medium text-gray-700">HCO₃⁻ (mmol/L)</label><input type="text" id="gasometria_hco3" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="21-28"></div>
+                                    <div><label for="gasometria_po2" class="text-sm font-medium text-gray-700">pO₂ (mmHg)</label><input type="text" id="gasometria_po2" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder=">60"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Columna 6: Perfil Hepático -->
+                        <div class="space-y-6 bg-orange-50 p-4 rounded-lg border border-orange-200">
+                            <div>
+                                <h3 class="text-lg font-semibold mb-3 text-red-700">Perfil Hepático</h3> <!-- Changed to text-red-700 -->
+                                <div class="space-y-3">
+                                    <div><label for="bilirrubina_direta" class="text-sm font-medium text-gray-700">Bilirrubina Direta (mg/dL)</label><input type="text" id="bilirrubina_direta" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="até 0.4"></div>
+                                    <div><label for="bilirrubina_indireta" class="text-sm font-medium text-gray-700">Bilirrubina Indireta (mg/dL)</label><input type="text" id="bilirrubina_indireta" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="até 1.0"></div>
+                                    <div><label for="bilirrubina_total" class="text-sm font-medium text-gray-700">Bilirrubina Total (mg/dL)</label><input type="text" id="bilirrubina_total" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="até 1.5"></div>
+                                    <div><label for="albumina" class="text-sm font-medium text-gray-700">Albumina (g/dL)</label><input type="text" id="albumina" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="3.5-4.8"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Columna 7: Eletrólitos -->
+                        <div class="space-y-6 bg-pink-50 p-4 rounded-lg border border-pink-200">
+                            <div>
+                                <h3 class="text-lg font-semibold mb-3 text-red-700">Eletrólitos</h3> <!-- Changed to text-red-700 -->
+                                <div class="space-y-3">
+                                    <div><label for="eletrolitos_na" class="text-sm font-medium text-gray-700">Na+ (mEq/L)</label><input type="text" id="eletrolitos_na" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="135-145"></div>
+                                    <div><label for="eletrolitos_k" class="text-sm font-medium text-gray-700">K+ (mEq/L)</label><input type="text" id="eletrolitos_k" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="3.5-5.0"></div>
+                                    <div><label for="eletrolitos_cl" class="text-sm font-medium text-gray-700">Cl- (mEq/L)</label><input type="text" id="eletrolitos_cl" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="97-107"></div>
+                                    <div><label for="eletrolitos_ca" class="text-sm font-medium text-gray-700">Ca²+ (mg/dL)</label><input type="text" id="eletrolitos_ca" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="8.5-10.5"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="mt-6">
                             <label for="outros_dados" class="block text-sm font-medium text-gray-700">Otros datos relevantes (signos, síntomas, comorbilidades)</label>
-                           <textarea id="outros_dados" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 focus:ring-teal-500 focus:border-teal-500" placeholder="Ej: Paciente de 45 años, masculino, con fiebre hace 3 días y tos productiva. Residente de zona endémica para Chagas."></textarea>
+                           <textarea id="outros_dados" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 text-sm focus:ring-red-500 focus:border-red-500" placeholder="Ej: Paciente de 45 años, masculino, con fiebre hace 3 días y tos productiva. Residente de zona endémica para Chagas."></textarea>
                     </div>
                     
                     <div id="action-buttons-container" class="mt-8 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-center items-center gap-4">
-                        <button type="button" id="generate-report-btn" class="w-full md:w-auto bg-teal-600 hover:bg-teal-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-teal-300">
+                        <button type="button" id="generate-report-btn" class="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-red-300">
                             Generar Reporte
                         </button>
                         <button type="button" id="print-report-btn" class="w-full md:w-auto bg-slate-600 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-slate-300" style="display: none;">
@@ -213,7 +256,7 @@
                     <h2 class="text-xl font-bold text-gray-900 mb-4">Tabla Resumen</h2>
                     <div class="overflow-x-auto">
                         <table class="min-w-full">
-                            <thead class="bg-teal-600">
+                            <thead class="bg-red-600"> <!-- Changed from teal-600 to red-600 -->
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Parámetro</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Valor</th>
@@ -252,7 +295,7 @@
 
         <footer id="main-footer" class="text-center mt-12 text-sm text-gray-500">
             <p>Desenvolvido como uma ferramenta de apoio para profissionais em missão.</p>
-            <p>&copy; 2024. Todos os direitos reservados.</p>
+            <p>&copy; 2024. Todos os derechos reservados.</p>
             <p class="mt-4 text-xs text-red-700">
                 As informações neste aplicativo não têm a intenção de ser aconselhamento profissional nem têm a intenção de substituir uma consulta pessoal com um médico, farmacêutico ou outro profissional de saúde qualificado. O leitor não deve desconsiderar aconselhamento médico nem adiar a busca por aconselhamento médico devido a alguma informação encontrada neste aplicativo.
             </p>
@@ -333,6 +376,21 @@
                 dengue_pcr_ns1: document.getElementById('dengue_pcr_ns1').value,
                 dengue_serologia_igm: document.getElementById('dengue_serologia_igm').value,
                 outros_dados: document.getElementById('outros_dados').value,
+                // New Gasometria parameters
+                gasometria_ph: document.getElementById('gasometria_ph').value,
+                gasometria_pco2: document.getElementById('gasometria_pco2').value,
+                gasometria_hco3: document.getElementById('gasometria_hco3').value,
+                gasometria_po2: document.getElementById('gasometria_po2').value,
+                // New Perfil Hepático parameters
+                bilirrubina_direta: document.getElementById('bilirrubina_direta').value,
+                bilirrubina_indireta: document.getElementById('bilirrubina_indireta').value,
+                bilirrubina_total: document.getElementById('bilirrubina_total').value,
+                albumina: document.getElementById('albumina').value,
+                // New Eletrólitos parameters
+                eletrolitos_na: document.getElementById('eletrolitos_na').value,
+                eletrolitos_k: document.getElementById('eletrolitos_k').value,
+                eletrolitos_cl: document.getElementById('eletrolitos_cl').value,
+                eletrolitos_ca: document.getElementById('eletrolitos_ca').value,
             };
 
             const dataString = Object.entries(labData)
@@ -348,9 +406,9 @@
                 - PLAQUETAS 150k-400k/mm³: > Trombocitosis: Reactiva a infección/inflamación, neoplasia. | < Trombocitopenia: Dengue, PTI, Lupus, fármacos, hiperesplenismo.
                 ### BIOQUÍMICA GENERAL
                 - CREATININA 0.6-1.4 mg/dl: > Insuficiencia Renal, < TFG.
-                - TGO/AST 10-40 U/L: > Daño hepático, pancreatitis aguda, IAM, cirrosis, alcoholismo, rabdomiólisis.
+                - TGO/AST 10-40 U/L: > Daño hepático, pancreatitis aguda, IAM, cirrose, alcoholismo, rabdomiólisis.
                 - TGP/ALT 10-40 U/L: > Hepatitis (aguda, viral), autoinmune, fármacos. Es más específica del hígado.
-                ### ANÁLISIS ESPECÍFICO PARA BOLIVIA
+                ### ANÁLISIS ESPECÍFICO
                 #### CHAGAS
                 - Diagnóstico en RN (0-6 meses): MICROMÉTODO. Positivo confirma Chagas Congénito.
                 - Diagnóstico en Niño >6m: SEROLOGÍA (HAI/ELISA). Positivo confirma Chagas Congénito.
@@ -359,31 +417,113 @@
                 - Signos de Alarma: Dolor abdominal, vómitos persistentes, sangrado de mucosas, aumento del hematocrito con caída de plaquetas.
                 - Diagnóstico Agudo (1-5 días): Antígeno NS1 o RT-PCR.
                 - Diagnóstico Convaleciente (>5 días): Serología IgM.
+                ### GASOMETRIA
+                Guia Estruturado para Análise de Gasometria Arterial
+                1. Interprete o pH:
+                pH < 7,35: Acidose
+                pH > 7,45: Alcalose
+                pH 7,35-7,45: Normal (pode haver distúrbio compensado)
+                2. Identifique o Distúrbio Primário (Respiratório ou Metabólico):
+                Acidose
+                pCO₂ > 45 mmHg: Acidose respiratória
+                HCO₃⁻ < 22 mmol/L: Acidose metabólica
+                Alcalose
+                pCO₂ < 35 mmHg: Alcalose respiratória
+                HCO₃⁻ > 26 mmol/L: Alcalose metabólica
+                3. Compensação
+                Verifique se há compensação esperada ou distúrbio misto.
+                Se a alteração no pCO₂ ou HCO₃⁻ não “acompanha” a alteração do pH, pense em distúrbio misto.
+                4. Analise pO₂
+                pO₂ > 60 mmHg: Normal
+                pO₂ < 60 mmHg: Hipoxemia – pesquisar causas pulmonares, circulatórias ou ventilatórias
+                Algoritmo Resumido para Análise
+                Olhe primeiro o pH
+                Acidose (< 7,35) ou alcalose (> 7,45)?
+                Veja quem é o “culpado”:
+                pCO₂ alterado → distúrbio respiratório
+                HCO₃⁻ alterado → distúrbio metabólico
+                Causas Comuns dos Distúrbios
+                Acidose Metabólica
+                Cetoacidose (DM, álcool, jejum, desnutrição)
+                Acidose lática (hipóxia, choque, convulsão, drogas)
+                Insuficiência renal
+                Perda gastrointestinal de HCO₃⁻ (diarreia, fístulas)
+                Perda renal de HCO₃⁻ (acetazolamida, ac. tubular renal)
+                Intoxicações (ferro, cianeto, CO, biguanidas)
+                Rabdomiólise, hipoaldosteronismo, hiperpotassemia
+                Acidose Respiratória
+                Hipoventilação, DPOC, asma grave, depressão do SNC, corpo estranho, doenças neuromusculares
+                Alcalose Metabólica
+                Vômitos, aspiração gástrica, diuréticos, hipopotassemia, perda de H⁺ ou Cl⁻ gastrointestinal
+                Alcalose Respiratória
+                Hiperventilação, ansiedade, dor, febre, hipóxia, doenças do SNC
+                Parâmetros de Normalidade
+                pH: 7,35-7,45
+                pCO₂: 35-45 mmHg
+                HCO₃⁻: 21-28 mmol/L
+                pO₂: >60 mmHg
+                Quadro-resumo prático
+                DistúrbiopHpCO₂HCO₃⁻Exemplo de causaAcidose metabólica<7,35↓/N<21Cetoacidose, insuf. renalAcidose respiratória<7,35>45↑/NDPOC, hipoventilaçãoAlcalose metabólica>7,45↑/N>28Vômitos, diuréticosAlcalose respiratória>7,45<35↓/NAnsiedade, hipóxiaPassos detalhados para análise:
+                Verifique o pH: acidemia ou alcalemia?
+                Identifique o distúrbio primário: olhe pCO₂ e HCO₃⁻.
+                Veja se há compensação adequada.
+                Investigue hipóxia (pO₂ < 60 mmHg).
+                Considere causas clínicas e quadro do paciente.
+                ### PERFIL HEPATICO
+                Análise de Função Hepática – Parâmetros Principais
+                1. Bilirrubina Direta (Conjugada)
+                Valor normal: até 0,4 mg/dL
+                Se elevada:
+                + FA/GGT aumentadas + USG sem dilatação de vias biliares
+                → Colestase intra-hepática
+                Causas: cirrose biliar, medicamentos (colestase medicamentosa), hepatocarcinoma.
+                + FA/GGT aumentadas + USG com dilatação de vias biliares
+                → Colestase extra-hepática
+                Causas: coledocolitíase, neoplasias (cabeça de pâncreas, via biliar).
+                + AST/ALT aumentadas
+                → Lesão hepatocelular
+                Causas: hepatites virais, medicamentosas, dano hepático tardio, febre amarela, uso crônico de álcool.
+                2. Bilirrubina Indireta (Não Conjugada)
+                Valor normal: até 1,0 mg/dL
+                Se elevada:
+                Causas: hemólise (intravascular/extravascular), sepsis, insuficiência cardíaca (congestiva), hipovolemia, deficiência de ácido fólico ou vitamina B12, cirrose hepática, hepatite tóxica, icterícia do embarazo.
+                3. Bilirrubina Total
+                Valor normal: até 1,5 mg/dL
+                Se elevada:
+                Causas: dano hepático tóxico ou neoplásico, doenças hemolíticas, colestase, hemólise intravascular, cirrose, insuficiência cardíaca, litíase dos ductos biliares, colangite, carcinoma de pâncreas.
+                4. Albumina
+                Valor normal: 3,5 – 4,8 g/dL
+                Se diminuída (hipoalbuminemia):
+                Interferentes laboratoriais: ampicilina, heparina, hemoglobina, lipemia.
+                Causas clínicas: lesão hepática (cirrose, hepatite alcoólica), desnutrição, neoplasias, síndrome nefrótica, dieta vegana restrita, uso de ACO, estrógenos, aspirina, penicilina, aumento da bilirrubina.
+                Importante:
+                Hipoalbuminemia associada a INR/TTPA aumentados → sinal de insuficiência hepática global!
+                Resumo para consulta rápida:
+                ParâmetroValor normalInterpretação/AlteraçõesPrincipais CausasBilirrubina Diretaaté 0,4 mg/dLElevação + FA/GGT +/– dilatação VB por USGColestase intra/extra-hepática, hepatites, cirrose, tumoresBilirrubina Indiretaaté 1,0 mg/dLElevaçãoHemólise, IC, hepatite tóxica, cirrose, gravidezBilirrubina Totalaté 1,5 mg/dLElevaçãoHepatopatia, colestase, hemólise, CA pâncreas, colangite, cirroseAlbumina3,5-4,8 g/dLDiminuição (hipoalbuminemia)Cirrose, neoplasia, Sd. nefrótica, desnutrição, hepatite alcoólicaDICA PRÁTICA:
+
+                AST/ALT predominantemente elevadas = lesão hepatocelular
+                FA/GGT predominantemente elevadas = colestase
+                Hipoalbuminemia + aumento INR = falência hepática
+                ### ELECTROLITOS
+                Parâmetros de Eletrólitos – Interpretação Clínica
+                EletrólitoValor NormalAlteraçãoPrincipais Causas de Aumento (>)Principais Causas de Redução (<)Na+135 – 145 mEq/LHipernatremiaDesidratação grave (perda de água), vômitos, diarreia, queimaduras extensas, traumas muscularesHiponatremia- Perda extrema de urina (DM), ac. metabólica, diarreia, uso de diuréticosK+3,5 – 5,0 mEq/LHipercalemiaDoença renal crônica, uremia extrarrenal, choque transfusional, ICCHipocalemia- Perdas excessivas (urinárias/GI), edema, taquicardia, PCR, irritabilidade muscularCl-97 – 107 mEq/LHipercloremiaDieta rica em sal, ac. metabólica (perda de HCO₃⁻), intoxicação por salicilatos, síndrome nefróticaHipocloremia- Vômitos repetidos, diarreia, sudorese profusa, pneumonia lobar, queimaduras extensas, diuréticosCa²+8,5 – 10,5 mg/dLHipercalcemiaHiperparatireoidismo, neoplasias ósseas, intoxicação por vit. D, uso de estrógenos, tiazídicos, teofilina, lítio, sarcoidose, CushingHipocalcemia- Doença celíaca, hipoparatireoidismo, deficiência de vit. C, pancreatite aguda, anticonvulsivantes (barbitúricos/hidantoinatos)Como analisar no contexto clínico:
+                Na+
+                > 145: Sempre pensar em perdas de água, situações catabólicas ou déficit de reposição.
+                < 135: Investigar perdas urinárias (diuréticos, DM), perdas digestivas (diarreia/vômitos) ou diluição (SIADH, ICC, insuficiência renal).
+                K+
+                > 5,0: Suspeitar de insuficiência renal, lesão tecidual extensa ou medicamentos.
+                < 3,5: Perdas digestivas ou urinárias; atenção ao risco de arritmias!
+                Cl-
+                > 107: Costuma acompanhar acidose metabólica e hipernatremia; investigar causas renais e não-renais.
+                < 97: Frequentemente associado a vômitos, perda de ácido gástrico, ou uso abusivo de diuréticos.
+                Ca²+:
+                > 10,5: Causas principais são doenças ósseas, tumores, hiperparatireoidismo.
+                < 8,5: Atentar para distúrbios endócrinos, má absorção e drogas.
+                DICA:
+
+                Sempre correlacionar os distúrbios eletrolíticos com quadro clínico, volume urinário, função renal e uso de medicamentos!
             `;
             
-            // Content for 'Para el Paciente' (exact text as provided by user in image_d887f5.png)
-            const folhetoPacienteContent = `
-Folheto do Paciente
-Anemia
-O que é?
-Anemia é uma condição na qual o corpo não tem glóbulos vermelhos saudáveis em quantidade suficiente para transportar oxigénio adequadamente para os tecidos. Isso pode levar a sintomas como fadiga e fraqueza.
-Sinais/sintomas comuns
-Os sintomas comuns da anemia incluem fadiga, fraqueza, palidez, falta de ar, tonturas, dores de cabeça e mãos e pés frios. Algumas pessoas podem também sentir palpitações cardíacas e dificuldade de concentração.
-Causas ou fatores de risco
-A anemia pode ser causada por deficiência de ferro na dieta, perda de sangue (devido a menstruação intensa, úlceras, cirurgias, etc.), doenças crónicas (como doença renal, doenças inflamatórias), problemas na medula óssea ou fatores genéticos. Uma dieta pobre em ferro, gravidez e histórico familiar de anemia também são fatores de risco.
-Possíveis complicações
-Se não tratada, a anemia pode levar a complicações como fadiga extrema que impede a realização de tarefas diárias, problemas cardíacos (como arritmias ou insuficiência cardíaca), complicações na gravidez e aumento da suscetibilidade a infeções.
-Opções de tratamento
-O tratamento para a anemia depende da causa e da gravidade da condição. Pode incluir suplementos de ferro, mudanças na dieta (aumentar o consumo de alimentos ricos em ferro), transfusões de sangue, medicamentos para tratar a causa subjacente ou, em casos raros, transplante de medula óssea.
-Quando procurar ajuda
-Procure ajuda médica se sentir fadiga persistente, falta de ar, tonturas frequentes, ou outros sintomas de anemia. É importante obter um diagnóstico preciso e um plano de tratamento adequado para evitar complicações.
-
-Disclaimer
-Este folheto é apenas para fins informativos gerais e não substitui o aconselhamento médico profissional.`;
-
-            // This variable is now intentionally empty, as the LLM will generate its content based on lab data
-            const diagnosticoDiferencialCompletoContent = ``; 
-
             const promptText = `
 Actúa como un médico especialista en patología clínica. Analiza los siguientes resultados de laboratorio y datos clínicos.
 Usa tu conocimiento y, FUNDAMENTALMENTE, la base de referencia que te proporciono para guiar tu interpretación. El reporte debe ser en español.
@@ -441,7 +581,6 @@ Seu objeto JSON DEVE conter as seguintes chaves e estruturas, preenchendo-as com
                             required: ["parametro", "valor", "referencia", "interpretacion"]
                         }
                     },
-                    // Removed explicacionSencilla as a direct property, it will now be added dynamically in JS based on `folhetoPacienteContent`
                     reporteDetallado: { // New structure for reporteDetallado
                         type: "OBJECT",
                         properties: {
@@ -477,14 +616,12 @@ Seu objeto JSON DEVE conter as seguintes chaves e estruturas, preenchendo-as com
                             hipotesis: { type: "STRING" }, // Kept for general hypothesis
                             causas: { type: "STRING" } // Kept for general causes based on reference
                         },
-                        // Made these optional in required for flexibility
                         required: ["impressaoClinica", "doencaPulmonar", "hipoxemia", "problemasCronicos", "interpretacionIntegrada", "alertas", "hipotesis", "causas"]
                     },
                     explicacionTecnica: { type: "STRING" },
                     diagnosticoDiferencialCompleto: { type: "STRING" }, // Now a string directly from LLM
                     referencias: { type: "STRING" }
                 },
-                // Removed explicacionSencilla from the top-level required array
                 required: ["tablaResumen", "reporteDetallado", "explicacionTecnica", "diagnosticoDiferencialCompleto", "referencias"]
             };
 
@@ -541,14 +678,14 @@ Seu objeto JSON DEVE conter as seguintes chaves e estruturas, preenchendo-as com
         const tabContents = document.querySelectorAll('.tab-content');
         
         // Define an array of colors to cycle through
-        const tabColors = ['black-tab', 'red-tab']; 
+        const tabColors = ['black-tab', 'red-tab', 'black-tab', 'red-tab', 'black-tab']; // Updated for 5 tabs
 
         tabs.forEach((tab, index) => {
             tab.addEventListener('click', () => {
                 const targetId = tab.dataset.tab;
                 const target = document.getElementById(targetId);
 
-                tabs.forEach((t, i) => {
+                tabs.forEach((t) => {
                     t.classList.remove('active', 'black-tab', 'red-tab');
                     t.classList.add('inactive'); // Add inactive class for default styling
                 });
@@ -585,7 +722,7 @@ Seu objeto JSON DEVE conter as seguintes chaves e estruturas, preenchendo-as com
                 });
             }
 
-            // "Para el Paciente" content is removed, so no population here.
+            // "Para el Paciente" content is removed from here
 
             // Populate "Reporte Detallado" content with new structure
             const reporteDetallado = data.reporteDetallado || {};
