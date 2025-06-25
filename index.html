@@ -14,7 +14,7 @@
             background-color: #f8fafc; /* bg-slate-50 */
         }
         .loader {
-            border-top-color: #dc2626; /* red-600 */ /* Changed from teal-600 to red-600 */
+            border-top-color: #dc2626; /* red-600 */
             -webkit-animation: spin 1s linear infinite;
             animation: spin 1s linear infinite;
         }
@@ -28,7 +28,6 @@
         .tab-content.active {
             display: block;
         }
-        /* New styles for alternating tab colors */
         .tab-btn.active.black-tab {
             border-bottom-color: #1a202c; /* black */
             color: #1a202c;
@@ -43,29 +42,33 @@
             color: #64748b; /* slate-500 */
             border-bottom-color: transparent;
         }
+        /* --- CSS para Impressão Corrigido --- */
         @media print {
             body {
                 background-color: white !important;
             }
+            /* Esconde tudo por padrão */
             body * {
                 visibility: hidden;
             }
+            /* Mostra apenas a seção do relatório e seu conteúdo */
             #report-output, #report-output * {
                 visibility: visible;
             }
-             .tab-buttons-container, #action-buttons-container, #main-header, #main-footer, #input-section, #whatsapp-share-btn { /* Hide the share button on print */
+            /* Oculta elementos da interface que não devem ser impressos */
+            .tab-buttons-container, #action-buttons-container, #main-header, #main-footer, #input-section, #whatsapp-share-btn {
                 display: none !important;
             }
+            /* Garante que o container do relatório flua corretamente no documento de impressão */
             #report-output {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
+                position: static; /* Alterado de 'absolute' para 'static' */
                 box-shadow: none;
                 border: none;
+                width: 100%;
             }
+            /* Garante que o conteúdo de todas as abas seja exibido na impressão */
             .tab-content {
-                display: block !important; /* Mostra todo o conteúdo na impressão */
+                display: block !important;
                 margin-bottom: 2rem;
                 padding: 0 !important;
             }
@@ -81,7 +84,6 @@
     <div class="container mx-auto p-4 md:p-8 max-w-7xl">
         <header id="main-header" class="text-center mb-8">
             <h1 class="text-3xl md:text-4xl font-bold text-gray-900">MISSIONARY MEDICAL CARE ⚕️</h1>
-            <!-- Frase alterada para espanhol -->
             <p class="text-md text-gray-600 mt-2">Una herramienta de apoyo para el análisis de exámenes, basada en IA y en sus referencias.</p>
         </header>
 
@@ -236,7 +238,7 @@
             
             <div id="error-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative my-6" role="alert">
                 <strong class="font-bold">¡Ocurrió un error!</strong>
-                <span id="error-content" class="block sm:inline">No fue posible generar el reporte. Por favor, intente nuevamente.</span>
+                <span id="error-content" class="block sm:inline">No fue posible generar el reporte.</span>
             </div>
 
             <!-- Seção do Relatório Gerado -->
@@ -270,8 +272,6 @@
                     </div>
                 </div>
                 
-                <!-- Removed "Para el Paciente" content section -->
-
                 <div id="reporte-detallado-section" class="tab-content">
                     <h2 class="text-xl font-bold text-gray-900 mb-4">Reporte Detallado (Técnico)</h2>
                     <div id="reporte-detallado-content" class="space-y-4 prose max-w-none text-gray-700"></div>
@@ -297,7 +297,6 @@
         <footer id="main-footer" class="text-center mt-12 text-sm text-gray-500">
             <p>Desarrollado como una herramienta de apoyo para profesionales en misión.</p>
             <p>&copy; 2024. Todos los derechos reservados.</p>
-            <!-- Disclaimer alterado para espanhol -->
             <p class="mt-4 text-xs text-red-700">
                 La información en esta aplicación no tiene la intención de ser un consejo profesional ni pretende reemplazar una consulta personal con un médico, farmacéutico u otro profesional de la salud calificado. El lector no debe ignorar el consejo médico ni posponer la búsqueda de consejo médico debido a la información encontrada en esta aplicación.
             </p>
@@ -378,17 +377,14 @@
                 dengue_pcr_ns1: document.getElementById('dengue_pcr_ns1').value,
                 dengue_serologia_igm: document.getElementById('dengue_serologia_igm').value,
                 outros_dados: document.getElementById('outros_dados').value,
-                // New Gasometria parameters
                 gasometria_ph: document.getElementById('gasometria_ph').value,
                 gasometria_pco2: document.getElementById('gasometria_pco2').value,
                 gasometria_hco3: document.getElementById('gasometria_hco3').value,
                 gasometria_po2: document.getElementById('gasometria_po2').value,
-                // New Perfil Hepático parameters
                 bilirrubina_direta: document.getElementById('bilirrubina_direta').value,
                 bilirrubina_indireta: document.getElementById('bilirrubina_indireta').value,
                 bilirrubina_total: document.getElementById('bilirrubina_total').value,
                 albumina: document.getElementById('albumina').value,
-                // New Eletrólitos parameters
                 eletrolitos_na: document.getElementById('eletrolitos_na').value,
                 eletrolitos_k: document.getElementById('eletrolitos_k').value,
                 eletrolitos_cl: document.getElementById('eletrolitos_cl').value,
@@ -420,110 +416,110 @@
                 - Diagnóstico Agudo (1-5 días): Antígeno NS1 o RT-PCR.
                 - Diagnóstico Convaleciente (>5 días): Serología IgM.
                 ### GASOMETRIA
-                Guia Estruturado para Análise de Gasometria Arterial
-                1. Interprete o pH:
-                pH < 7,35: Acidose
-                pH > 7,45: Alcalose
-                pH 7,35-7,45: Normal (pode haver distúrbio compensado)
-                2. Identifique o Distúrbio Primário (Respiratório ou Metabólico):
-                Acidose
-                pCO₂ > 45 mmHg: Acidose respiratória
-                HCO₃⁻ < 22 mmol/L: Acidose metabólica
-                Alcalose
-                pCO₂ < 35 mmHg: Alcalose respiratória
-                HCO₃⁻ > 26 mmol/L: Alcalose metabólica
-                3. Compensação
-                Verifique se há compensação esperada ou distúrbio misto.
-                Se a alteração no pCO₂ ou HCO₃⁻ não “acompanha” a alteração do pH, pense em distúrbio misto.
-                4. Analise pO₂
-                pO₂ > 60 mmHg: Normal
-                pO₂ < 60 mmHg: Hipoxemia – pesquisar causas pulmonares, circulatórias ou ventilatórias
-                Algoritmo Resumido para Análise
-                Olhe primeiro o pH
-                Acidose (< 7,35) ou alcalose (> 7,45)?
-                Veja quem é o “culpado”:
-                pCO₂ alterado → distúrbio respiratório
-                HCO₃⁻ alterado → distúrbio metabólico
-                Causas Comuns dos Distúrbios
-                Acidose Metabólica
-                Cetoacidose (DM, álcool, jejum, desnutrição)
-                Acidose lática (hipóxia, choque, convulsão, drogas)
-                Insuficiência renal
-                Perda gastrointestinal de HCO₃⁻ (diarreia, fístulas)
-                Perda renal de HCO₃⁻ (acetazolamida, ac. tubular renal)
-                Intoxicações (ferro, cianeto, CO, biguanidas)
-                Rabdomiólise, hipoaldosteronismo, hiperpotassemia
-                Acidose Respiratória
-                Hipoventilação, DPOC, asma grave, depressão do SNC, corpo estranho, doenças neuromusculares
-                Alcalose Metabólica
-                Vômitos, aspiração gástrica, diuréticos, hipopotassemia, perda de H⁺ ou Cl⁻ gastrointestinal
-                Alcalose Respiratória
-                Hiperventilação, ansiedade, dor, febre, hipóxia, doenças do SNC
-                Parâmetros de Normalidade
-                pH: 7,35-7,45
-                pCO₂: 35-45 mmHg
-                HCO₃⁻: 21-28 mmol/L
-                pO₂: >60 mmHg
-                Quadro-resumo prático
-                DistúrbiopHpCO₂HCO₃⁻Exemplo de causaAcidose metabólica<7,35↓/N<21Cetoacidose, insuf. renalAcidose respiratória<7,35>45↑/NDPOC, hipoventilaçãoAlcalose metabólica>7,45↑/N>28Vômitos, diuréticosAlcalose respiratória>7,45<35↓/NAnsiedade, hipóxiaPassos detalhados para análise:
-                Verifique o pH: acidemia ou alcalemia?
-                Identifique o distúrbio primário: olhe pCO₂ e HCO₃⁻.
-                Veja se há compensação adequada.
-                Investigue hipóxia (pO₂ < 60 mmHg).
-                Considere causas clínicas e quadro do paciente.
+                 Guia Estruturado para Análise de Gasometria Arterial
+                 1. Interprete o pH:
+                 pH < 7,35: Acidose
+                 pH > 7,45: Alcalose
+                 pH 7,35-7,45: Normal (pode haver distúrbio compensado)
+                 2. Identifique o Distúrbio Primário (Respiratório ou Metabólico):
+                 Acidose
+                 pCO₂ > 45 mmHg: Acidose respiratória
+                 HCO₃⁻ < 22 mmol/L: Acidose metabólica
+                 Alcalose
+                 pCO₂ < 35 mmHg: Alcalose respiratória
+                 HCO₃⁻ > 26 mmol/L: Alcalose metabólica
+                 3. Compensação
+                 Verifique se há compensação esperada ou distúrbio misto.
+                 Se a alteração no pCO₂ ou HCO₃⁻ não “acompanha” a alteração do pH, pense em distúrbio misto.
+                 4. Analise pO₂
+                 pO₂ > 60 mmHg: Normal
+                 pO₂ < 60 mmHg: Hipoxemia – pesquisar causas pulmonares, circulatórias ou ventilatórias
+                 Algoritmo Resumido para Análise
+                 Olhe primeiro o pH
+                 Acidose (< 7,35) ou alcalose (> 7,45)?
+                 Veja quem é o “culpado”:
+                 pCO₂ alterado → distúrbio respiratório
+                 HCO₃⁻ alterado → distúrbio metabólico
+                 Causas Comuns dos Distúrbios
+                 Acidose Metabólica
+                 Cetoacidose (DM, álcool, jejum, desnutrição)
+                 Acidose lática (hipóxia, choque, convulsão, drogas)
+                 Insuficiência renal
+                 Perda gastrointestinal de HCO₃⁻ (diarreia, fístulas)
+                 Perda renal de HCO₃⁻ (acetazolamida, ac. tubular renal)
+                 Intoxicações (ferro, cianeto, CO, biguanidas)
+                 Rabdomiólise, hipoaldosteronismo, hiperpotassemia
+                 Acidose Respiratória
+                 Hipoventilação, DPOC, asma grave, depressão do SNC, corpo estranho, doenças neuromusculares
+                 Alcalose Metabólica
+                 Vômitos, aspiração gástrica, diuréticos, hipopotassemia, perda de H⁺ ou Cl⁻ gastrointestinal
+                 Alcalose Respiratória
+                 Hiperventilação, ansiedade, dor, febre, hipóxia, doenças do SNC
+                 Parâmetros de Normalidade
+                 pH: 7,35-7,45
+                 pCO₂: 35-45 mmHg
+                 HCO₃⁻: 21-28 mmol/L
+                 pO₂: >60 mmHg
+                 Quadro-resumo prático
+                 DistúrbiopHpCO₂HCO₃⁻Exemplo de causaAcidose metabólica<7,35↓/N<21Cetoacidose, insuf. renalAcidose respiratória<7,35>45↑/NDPOC, hipoventilaçãoAlcalose metabólica>7,45↑/N>28Vômitos, diuréticosAlcalose respiratória>7,45<35↓/NAnsiedade, hipóxiaPassos detalhados para análise:
+                 Verifique o pH: acidemia ou alcalemia?
+                 Identifique o distúrbio primário: olhe pCO₂ e HCO₃⁻.
+                 Veja se há compensação adequada.
+                 Investigue hipóxia (pO₂ < 60 mmHg).
+                 Considere causas clínicas e quadro do paciente.
                 ### PERFIL HEPATICO
-                Análise de Função Hepática – Parâmetros Principais
-                1. Bilirrubina Direta (Conjugada)
-                Valor normal: até 0,4 mg/dL
-                Se elevada:
-                + FA/GGT aumentadas + USG sem dilatação de vias biliares
-                → Colestase intra-hepática
-                Causas: cirrose biliar, medicamentos (colestase medicamentosa), hepatocarcinoma.
-                + FA/GGT aumentadas + USG com dilatação de vias biliares
-                → Colestase extra-hepática
-                Causas: coledocolitíase, neoplasias (cabeça de pâncreas, via biliar).
-                + AST/ALT aumentadas
-                → Lesão hepatocelular
-                Causas: hepatites virais, medicamentosas, dano hepático tardio, febre amarela, uso crônico de álcool.
-                2. Bilirrubina Indireta (Não Conjugada)
-                Valor normal: até 1,0 mg/dL
-                Se elevada:
-                Causas: hemólise (intravascular/extravascular), sepsis, insuficiência cardíaca (congestiva), hipovolemia, deficiência de ácido fólico ou vitamina B12, cirrose hepática, hepatite tóxica, icterícia do embarazo.
-                3. Bilirrubina Total
-                Valor normal: até 1,5 mg/dL
-                Se elevada:
-                Causas: dano hepático tóxico ou neoplásico, doenças hemolíticas, colestase, hemólise intravascular, cirrose, insuficiência cardíaca, litíase dos ductos biliares, colangite, carcinoma de pâncreas.
-                4. Albumina
-                Valor normal: 3,5 – 4,8 g/dL
-                Se diminuída (hipoalbuminemia):
-                Interferentes laboratoriais: ampicilina, heparina, hemoglobina, lipemia.
-                Causas clínicas: lesão hepática (cirrose, hepatite alcoólica), desnutrição, neoplasias, síndrome nefrótica, dieta vegana restrita, uso de ACO, estrógenos, aspirina, penicilina, aumento da bilirrubina.
-                Importante:
-                Hipoalbuminemia associada a INR/TTPA aumentados → sinal de insuficiência hepática global!
-                Resumo para consulta rápida:
-                ParâmetroValor normalInterpretação/AlteraçõesPrincipais CausasBilirrubina Diretaaté 0,4 mg/dLElevação + FA/GGT +/– dilatação VB por USGColestase intra/extra-hepática, hepatites, cirrose, tumoresBilirrubina Indiretaaté 1,0 mg/dLElevaçãoHemólise, IC, hepatite tóxica, cirrose, gravidezBilirrubina Totalaté 1,5 mg/dLElevaçãoHepatopatia, colestase, hemólise, CA pâncreas, colangite, cirroseAlbumina3,5-4,8 g/dLDiminuição (hipoalbuminemia)Cirrose, neoplasia, Sd. nefrótica, desnutrição, hepatite alcoólicaDICA PRÁTICA:
+                 Análise de Função Hepática – Parâmetros Principais
+                 1. Bilirrubina Direta (Conjugada)
+                 Valor normal: até 0,4 mg/dL
+                 Se elevada:
+                 + FA/GGT aumentadas + USG sem dilatação de vias biliares
+                 → Colestase intra-hepática
+                 Causas: cirrose biliar, medicamentos (colestase medicamentosa), hepatocarcinoma.
+                 + FA/GGT aumentadas + USG com dilatação de vias biliares
+                 → Colestase extra-hepática
+                 Causas: coledocolitíase, neoplasias (cabeça de pâncreas, via biliar).
+                 + AST/ALT aumentadas
+                 → Lesão hepatocelular
+                 Causas: hepatites virais, medicamentosas, dano hepático tardio, febre amarela, uso crônico de álcool.
+                 2. Bilirrubina Indireta (Não Conjugada)
+                 Valor normal: até 1,0 mg/dL
+                 Se elevada:
+                 Causas: hemólise (intravascular/extravascular), sepsis, insuficiência cardíaca (congestiva), hipovolemia, deficiência de ácido fólico ou vitamina B12, cirrose hepática, hepatite tóxica, icterícia do embarazo.
+                 3. Bilirrubina Total
+                 Valor normal: até 1,5 mg/dL
+                 Se elevada:
+                 Causas: dano hepático tóxico ou neoplásico, doenças hemolíticas, colestase, hemólise intravascular, cirrose, insuficiência cardíaca, litíase dos ductos biliares, colangite, carcinoma de pâncreas.
+                 4. Albumina
+                 Valor normal: 3,5 – 4,8 g/dL
+                 Se diminuída (hipoalbuminemia):
+                 Interferentes laboratoriais: ampicilina, heparina, hemoglobina, lipemia.
+                 Causas clínicas: lesão hepática (cirrose, hepatite alcoólica), desnutrição, neoplasias, síndrome nefrótica, dieta vegana restrita, uso de ACO, estrógenos, aspirina, penicilina, aumento da bilirrubina.
+                 Importante:
+                 Hipoalbuminemia associada a INR/TTPA aumentados → sinal de insuficiência hepática global!
+                 Resumo para consulta rápida:
+                 ParâmetroValor normalInterpretação/AlteraçõesPrincipais CausasBilirrubina Diretaaté 0,4 mg/dLElevação + FA/GGT +/– dilatação VB por USGColestase intra/extra-hepática, hepatites, cirrose, tumoresBilirrubina Indiretaaté 1,0 mg/dLElevaçãoHemólise, IC, hepatite tóxica, cirrose, gravidezBilirrubina Totalaté 1,5 mg/dLElevaçãoHepatopatia, colestase, hemólise, CA pâncreas, colangite, cirroseAlbumina3,5-4,8 g/dLDiminuição (hipoalbuminemia)Cirrose, neoplasia, Sd. nefrótica, desnutrição, hepatite alcoólicaDICA PRÁTICA:
 
-                AST/ALT predominantemente elevadas = lesão hepatocelular
-                FA/GGT predominantemente elevadas = colestase
-                Hipoalbuminemia + aumento INR = falência hepática
+                 AST/ALT predominantemente elevadas = lesão hepatocelular
+                 FA/GGT predominantemente elevadas = colestase
+                 Hipoalbuminemia + aumento INR = falência hepática
                 ### ELECTROLITOS
-                Parâmetros de Eletrólitos – Interpretação Clínica
-                EletrólitoValor NormalAlteraçãoPrincipais Causas de Aumento (>)Principais Causas de Redução (<)Na+135 – 145 mEq/LHipernatremiaDesidratação grave (perda de água), vômitos, diarreia, queimaduras extensas, traumas muscularesHiponatremia- Perda extrema de urina (DM), ac. metabólica, diarreia, uso de diuréticosK+3,5 – 5,0 mEq/LHipercalemiaDoença renal crônica, uremia extrarrenal, choque transfusional, ICCHipocalemia- Perdas excessivas (urinárias/GI), edema, taquicardia, PCR, irritabilidade muscularCl-97 – 107 mEq/LHipercloremiaDieta rica em sal, ac. metabólica (perda de HCO₃⁻), intoxicação por salicilatos, síndrome nefróticaHipocloremia- Vômitos repetidos, diarreia, sudorese profusa, pneumonia lobar, queimaduras extensas, diuréticosCa²+8,5 – 10,5 mg/dLHipercalcemiaHiperparatireoidismo, neoplasias ósseas, intoxicação por vit. D, uso de estrógenos, tiazídicos, teofilina, lítio, sarcoidose, CushingHipocalcemia- Doença celíaca, hipoparatireoidismo, deficiência de vit. C, pancreatite aguda, anticonvulsivantes (barbitúricos/hidantoinatos)Como analisar no contexto clínico:
-                Na+
-                > 145: Sempre pensar em perdas de água, situações catabólicas ou déficit de reposição.
-                < 135: Investigar perdas urinárias (diuréticos, DM), perdas digestivas (diarreia/vômitos) ou diluição (SIADH, ICC, insuficiência renal).
-                K+
-                > 5,0: Suspeitar de insuficiência renal, lesão tecidual extensa ou medicamentos.
-                < 3,5: Perdas digestivas ou urinárias; atenção ao risco de arritmias!
-                Cl-
-                > 107: Costuma acompanhar acidose metabólica e hipernatremia; investigar causas renais e não-renais.
-                < 97: Frequentemente associado a vômitos, perda de ácido gástrico, ou uso abusivo de diuréticos.
-                Ca²+:
-                > 10,5: Causas principais são doenças ósseas, tumores, hiperparatireoidismo.
-                < 8,5: Atentar para distúrbios endócrinos, má absorção e drogas.
-                DICA:
+                 Parâmetros de Eletrólitos – Interpretação Clínica
+                 EletrólitoValor NormalAlteraçãoPrincipais Causas de Aumento (>)Principais Causas de Redução (<)Na+135 – 145 mEq/LHipernatremiaDesidratação grave (perda de água), vômitos, diarreia, queimaduras extensas, traumas muscularesHiponatremia- Perda extrema de urina (DM), ac. metabólica, diarreia, uso de diuréticosK+3,5 – 5,0 mEq/LHipercalemiaDoença renal crônica, uremia extrarrenal, choque transfusional, ICCHipocalemia- Perdas excessivas (urinárias/GI), edema, taquicardia, PCR, irritabilidade muscularCl-97 – 107 mEq/LHipercloremiaDieta rica em sal, ac. metabólica (perda de HCO₃⁻), intoxicação por salicilatos, síndrome nefróticaHipocloremia- Vômitos repetidos, diarreia, sudorese profusa, pneumonia lobar, queimaduras extensas, diuréticosCa²+8,5 – 10,5 mg/dLHipercalcemiaHiperparatireoidismo, neoplasias ósseas, intoxicação por vit. D, uso de estrógenos, tiazídicos, teofilina, lítio, sarcoidose, CushingHipocalcemia- Doença celíaca, hipoparatireoidismo, deficiência de vit. C, pancreatite aguda, anticonvulsivantes (barbitúricos/hidantoinatos)Como analisar no contexto clínico:
+                 Na+
+                 > 145: Sempre pensar em perdas de água, situações catabólicas ou déficit de reposição.
+                 < 135: Investigar perdas urinárias (diuréticos, DM), perdas digestivas (diarreia/vômitos) ou diluição (SIADH, ICC, insuficiência renal).
+                 K+
+                 > 5,0: Suspeitar de insuficiência renal, lesão tecidual extensa ou medicamentos.
+                 < 3,5: Perdas digestivas ou urinárias; atenção ao risco de arritmias!
+                 Cl-
+                 > 107: Costuma acompanhar acidose metabólica e hipernatremia; investigar causas renais e não-renais.
+                 < 97: Frequentemente associado a vômitos, perda de ácido gástrico, ou uso abusivo de diuréticos.
+                 Ca²+:
+                 > 10,5: Causas principais são doenças ósseas, tumores, hiperparatireoidismo.
+                 < 8,5: Atentar para distúrbios endócrinos, má absorção e drogas.
+                 DICA:
 
-                Sempre correlacionar os distúrbios eletrolíticos com quadro clínico, volume urinário, função renal e uso de medicamentos!
+                 Sempre correlacionar os distúrbios eletrolíticos com quadro clínico, volume urinário, função renal e uso de medicamentos!
             `;
             
             const promptText = `
@@ -536,35 +532,35 @@ ${dataString}
 ## Base de Conocimiento de Referência:
 ${referenceText}
 
-## Formato de Saída (JSON):
+## Formato de Salida (JSON):
 
-Seu objeto JSON DEVE conter as seguintes chaves e estruturas, preenchendo-as com sua análise ou com os textos exatos solicitados.
+Tu objeto JSON DEBE contener las siguientes claves y estructuras, rellenándolas con tu análisis o con los textos exactos solicitados.
 
-1.  **"tablaResumen"**: Um ARRAY de objetos. Cada objeto deve ter as chaves "parametro", "valor", "referencia", "interpretacion".
+1.  **"tablaResumen"**: Un ARRAY de objetos. Cada objeto debe tener las claves "parametro", "valor", "referencia", "interpretacion".
 
-2.  **"reporteDetallado"**: Um OBJECT com as seguintes chaves, que representam a "Avaliação e Planejamento". Gere o conteúdo para cada campo com base nos dados fornecidos do paciente e na base de conhecimento. Se um campo não puder ser preenchido com base nos dados, deixe-o em branco ou indique "Não aplicável".
-    * **"impressaoClinica"**: STRING - Sua avaliação clínica inicial e impressão geral do caso.
-    * **"doencaPulmonar"**: OBJECT - Análise e planos para problemas pulmonares.
-        * **"titulo"**: STRING - Use "Doença Pulmonar Intersticial vs. Malignidade Pulmonar".
+2.  **"reporteDetallado"**: Un OBJECT con las siguientes claves, que representan la "Evaluación y Planificación". Genera el contenido para cada campo con base en los datos proporcionados del paciente y en la base de conocimiento. Si un campo no puede ser llenado con base en los datos, déjalo en blanco o indica "No aplicable".
+    * **"impressaoClinica"**: STRING - Tu evaluación clínica inicial e impresión general del caso.
+    * **"doencaPulmonar"**: OBJECT - Análisis y planes para problemas pulmonares.
+        * **"titulo"**: STRING - Usa "Enfermedad Pulmonar Intersticial vs. Malignidad Pulmonar".
         * **"dx"**: STRING - Diagnósticos (Dx) sugeridos para este problema.
-        * **"tx"**: STRING - Tratamentos (Tx) ou manejos sugeridos para este problema.
-    * **"hipoxemia"**: OBJECT - Análise e planos para hipoxemia.
-        * **"titulo"**: STRING - Use "Hipoxemia".
+        * **"tx"**: STRING - Tratamientos (Tx) o manejos sugeridos para este problema.
+    * **"hipoxemia"**: OBJECT - Análisis y planes para hipoxemia.
+        * **"titulo"**: STRING - Usa "Hipoxemia".
         * **"dx"**: STRING - Diagnósticos (Dx) sugeridos para este problema.
-        * **"tx"**: STRING - Tratamentos (Tx) ou manejos sugeridos para este problema.
-    * **"problemasCronicos"**: OBJECT - Análise e planos para problemas crônicos.
-        * **"hiperlipidemia"**: STRING - Análise e conduta para Hiperlipidemia.
-        * **"profilaxiaTVP"**: STRING - Análise e conduta para Profilaxia TVP.
-    * **"interpretacionIntegrada"**: STRING - Uma interpretação abrangente dos achados (se aplicável).
-    * **"alertas"**: STRING - Sinais de alerta importantes (se aplicável).
-    * **"hipotesis"**: STRING - Hipóteses diagnósticas mais prováveis (se aplicável).
-    * **"causas"**: STRING - Causas possíveis, estritamente baseadas na "Base de Conhecimento de Referência" fornecida (se aplicável).
+        * **"tx"**: STRING - Tratamientos (Tx) o manejos sugeridos para este problema.
+    * **"problemasCronicos"**: OBJECT - Análisis y planes para problemas crónicos.
+        * **"hiperlipidemia"**: STRING - Análisis y conducta para Hiperlipidemia.
+        * **"profilaxiaTVP"**: STRING - Análisis y conducta para Profilaxis TVP.
+    * **"interpretacionIntegrada"**: STRING - Una interpretación integral de los hallazgos (si aplica).
+    * **"alertas"**: STRING - Señales de alerta importantes (si aplica).
+    * **"hipotesis"**: STRING - Hipótesis diagnósticas más probables (si aplica).
+    * **"causas"**: STRING - Causas posibles, estrictamente basadas en la "Base de Conocimiento de Referencia" proporcionada (si aplica).
 
-3.  **"explicacionTecnica"**: Uma STRING para o glossário técnico, como nas versões anteriores.
+3.  **"explicacionTecnica"**: Una STRING para el glosario técnico, como en versiones anteriores.
 
-4.  **"diagnosticoDiferencialCompleto"**: Uma STRING que contenha a discussão de caso e os diagnósticos diferenciais. Esta seção DEVE ser gerada SOMENTE com base nos 'Dados do Paciente' e na 'Base de Conhecimento de Referência' fornecidos. Se os dados forem insuficientes para uma discussão detalhada, declare claramente 'Dados insuficientes para um diagnóstico diferencial detalhado com base nos exames de laboratório fornecidos.' Não invente informações ou cenários clínicos não suportados pelos dados presentes.
+4.  **"diagnosticoDiferencialCompleto"**: Una STRING que contenga la discusión del caso y los diagnósticos diferenciales. Esta sección DEBE ser generada ÚNICAMENTE con base en los 'Datos del Paciente' y la 'Base de Conocimiento de Referencia' proporcionados. Si los datos son insuficientes para una discusión detallada, declara claramente 'Datos insuficientes para un diagnóstico diferencial detallado con base en los exámenes de laboratorio proporcionados.' No inventes información o escenarios clínicos no soportados por los datos presentes.
 
-5.  **"referencias"**: Uma STRING contendo o texto das referências fornecidas.
+5.  **"referencias"**: Una STRING conteniendo el texto de las referencias proporcionadas.
 `;
 
             const schema = {
@@ -583,7 +579,7 @@ Seu objeto JSON DEVE conter as seguintes chaves e estruturas, preenchendo-as com
                             required: ["parametro", "valor", "referencia", "interpretacion"]
                         }
                     },
-                    reporteDetallado: { // New structure for reporteDetallado
+                    reporteDetallado: {
                         type: "OBJECT",
                         properties: {
                             impressaoClinica: { type: "STRING" },
@@ -613,34 +609,40 @@ Seu objeto JSON DEVE conter as seguintes chaves e estruturas, preenchendo-as com
                                 },
                                 required: ["hiperlipidemia", "profilaxiaTVP"]
                             },
-                            interpretacionIntegrada: { type: "STRING" }, // Kept for general interpretation
-                            alertas: { type: "STRING" }, // Kept for general alerts
-                            hipotesis: { type: "STRING" }, // Kept for general hypothesis
-                            causas: { type: "STRING" } // Kept for general causes based on reference
+                            interpretacionIntegrada: { type: "STRING" },
+                            alertas: { type: "STRING" },
+                            hipotesis: { type: "STRING" },
+                            causas: { type: "STRING" }
                         },
                         required: ["impressaoClinica", "doencaPulmonar", "hipoxemia", "problemasCronicos", "interpretacionIntegrada", "alertas", "hipotesis", "causas"]
                     },
                     explicacionTecnica: { type: "STRING" },
-                    diagnosticoDiferencialCompleto: { type: "STRING" }, // Now a string directly from LLM
+                    diagnosticoDiferencialCompleto: { type: "STRING" },
                     referencias: { type: "STRING" }
                 },
                 required: ["tablaResumen", "reporteDetallado", "explicacionTecnica", "diagnosticoDiferencialCompleto", "referencias"]
             };
 
             try {
-                const apiKey = ""; // API Key removida do código do cliente para segurança
+                // ATENÇÃO: A chave de API foi inserida aqui conforme solicitado.
+                // Esta prática não é recomendada por razões de segurança.
+                // Uma chave exposta pode ser usada indevidamente por terceiros.
+                const apiKey = "AIzaSyBLKj7L2c4BEZwnSeD2s5PLDhrkkyiqr4A"; 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`; 
                 const payload = { contents: [{ role: "user", parts: [{ text: promptText }] }], generationConfig: { responseMimeType: "application/json", responseSchema: schema } };
                 const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                
                 if (!response.ok) {
                     let errorMsg = `Error de API: ${response.status}.`;
                     try {
                         const errorBody = await response.json();
                         errorMsg = errorBody.error?.message || JSON.stringify(errorBody);
-                    } catch (e) { errorMsg += ' No se pudo obtener más detalhes del error.'; }
+                    } catch (e) { errorMsg += ' No se pudo obtener más detalles del error.'; }
                     throw new Error(errorMsg);
                 }
+                
                 const result = await response.json();
+                
                 if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts) {
                     const reportData = JSON.parse(result.candidates[0].content.parts[0].text);
                     displayReport(reportData);
@@ -649,7 +651,8 @@ Seu objeto JSON DEVE conter as seguintes chaves e estruturas, preenchendo-as com
                 }
             } catch (error) {
                 console.error("Error al generar reporte:", error);
-                document.getElementById('error-content').textContent = "Por favor, adicione uma chave de API válida para gerar o relatório. A chave foi removida por razões de segurança. " + error.message;
+                // Mensaje de error mejorado para el usuario.
+                document.getElementById('error-content').textContent = "No se pudo generar el reporte. Verifique su clave de API y su conexión a internet, o consulte la consola para detalles técnicos. Mensaje: " + error.message;
                 showSection(errorMessage, true);
             } finally {
                 showSection(loadingSection, false);
@@ -679,8 +682,7 @@ Seu objeto JSON DEVE conter as seguintes chaves e estruturas, preenchendo-as com
         const tabs = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
         
-        // Define an array of colors to cycle through
-        const tabColors = ['black-tab', 'red-tab', 'black-tab', 'red-tab', 'black-tab']; // Updated for 5 tabs
+        const tabColors = ['black-tab', 'red-tab', 'black-tab', 'red-tab', 'black-tab'];
 
         tabs.forEach((tab, index) => {
             tab.addEventListener('click', () => {
@@ -689,12 +691,11 @@ Seu objeto JSON DEVE conter as seguintes chaves e estruturas, preenchendo-as com
 
                 tabs.forEach((t) => {
                     t.classList.remove('active', 'black-tab', 'red-tab');
-                    t.classList.add('inactive'); // Add inactive class for default styling
+                    t.classList.add('inactive');
                 });
-
-                // Apply active class and correct color based on index
-                tab.classList.add('active', tabColors[index % tabColors.length]); // Cycle through colors
-                tab.classList.remove('inactive'); // Remove inactive class when active
+                
+                tab.classList.add('active', tabColors[index % tabColors.length]);
+                tab.classList.remove('inactive');
                 
                 tabContents.forEach(c => c.classList.remove('active'));
                 target.classList.add('active');
@@ -724,42 +725,39 @@ Seu objeto JSON DEVE conter as seguintes chaves e estruturas, preenchendo-as com
                 });
             }
 
-            // "Para el Paciente" content is removed from here
-
-            // Populate "Reporte Detallado" content with new structure
             const reporteDetallado = data.reporteDetallado || {};
             let detailedReportHtml = '';
             
             if (reporteDetallado.impressaoClinica) {
-                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Impressão Clínica:</h3><p>${(reporteDetallado.impressaoClinica || '').replace(/\n/g, '<br>')}</p>`;
+                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Impresión Clínica:</h3><p>${(reporteDetallado.impressaoClinica || '').replace(/\n/g, '<br>')}</p><br>`;
             }
 
-            if (reporteDetallado.doencaPulmonar) {
+            if (reporteDetallado.doencaPulmonar && (reporteDetallado.doencaPulmonar.dx || reporteDetallado.doencaPulmonar.tx)) {
                 detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">${reporteDetallado.doencaPulmonar.titulo}:</h3>`;
-                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Dx:</h4><p>${(reporteDetallado.doencaPulmonar.dx || '').replace(/\n/g, '<br>')}</p>`;
-                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Tx:</h4><p>${(reporteDetallado.doencaPulmonar.tx || '').replace(/\n/g, '<br>')}</p>`;
+                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Dx:</h4><p>${(reporteDetallado.doencaPulmonar.dx || 'No aplicable').replace(/\n/g, '<br>')}</p>`;
+                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Tx:</h4><p>${(reporteDetallado.doencaPulmonar.tx || 'No aplicable').replace(/\n/g, '<br>')}</p><br>`;
             }
 
-            if (reporteDetallado.hipoxemia) {
+            if (reporteDetallado.hipoxemia && (reporteDetallado.hipoxemia.dx || reporteDetallado.hipoxemia.tx)) {
                 detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">${reporteDetallado.hipoxemia.titulo}:</h3>`;
-                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Dx:</h4><p>${(reporteDetallado.hipoxemia.dx || '').replace(/\n/g, '<br>')}</p>`;
-                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Tx:</h4><p>${(reporteDetallado.hipoxemia.tx || '').replace(/\n/g, '<br>')}</p>`;
+                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Dx:</h4><p>${(reporteDetallado.hipoxemia.dx || 'No aplicable').replace(/\n/g, '<br>')}</p>`;
+                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Tx:</h4><p>${(reporteDetallado.hipoxemia.tx || 'No aplicable').replace(/\n/g, '<br>')}</p><br>`;
             }
 
-            if (reporteDetallado.problemasCronicos) {
-                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Problemas Crônicos:</h3>`;
-                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Hiperlipidemia:</h4><p>${(reporteDetallado.problemasCronicos.hiperlipidemia || '').replace(/\n/g, '<br>')}</p>`;
-                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Profilaxia TVP:</h4><p>${(reporteDetallado.problemasCronicos.profilaxiaTVP || '').replace(/\n/g, '<br>')}</p>`;
+            if (reporteDetallado.problemasCronicos && (reporteDetallado.problemasCronicos.hiperlipidemia || reporteDetallado.problemasCronicos.profilaxiaTVP)) {
+                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Problemas Crónicos:</h3>`;
+                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Hiperlipidemia:</h4><p>${(reporteDetallado.problemasCronicos.hiperlipidemia || 'No aplicable').replace(/\n/g, '<br>')}</p>`;
+                detailedReportHtml += `<h4 class="font-semibold text-gray-800">Profilaxis TVP:</h4><p>${(reporteDetallado.problemasCronicos.profilaxiaTVP || 'No aplicable').replace(/\n/g, '<br>')}</p><br>`;
             }
-            // Retained general interpretation, alerts, hypothesis, and causes as they are useful general fields
+            
             if (reporteDetallado.interpretacionIntegrada) {
-                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Interpretación Integrada:</h3><p>${(reporteDetallado.interpretacionIntegrada || '').replace(/\n/g, '<br>')}</p>`;
+                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Interpretación Integrada:</h3><p>${(reporteDetallado.interpretacionIntegrada || '').replace(/\n/g, '<br>')}</p><br>`;
             }
             if (reporteDetallado.alertas) {
-                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Señales de Alerta:</h3><p>${(reporteDetallado.alertas || '').replace(/\n/g, '<br>')}</p>`;
+                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Señales de Alerta:</h3><p>${(reporteDetallado.alertas || '').replace(/\n/g, '<br>')}</p><br>`;
             }
             if (reporteDetallado.hipotesis) {
-                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Hipótesis Diagnósticas:</h3><p>${(reporteDetallado.hipotesis || '').replace(/\n/g, '<br>')}</p>`;
+                detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Hipótesis Diagnósticas:</h3><p>${(reporteDetallado.hipotesis || '').replace(/\n/g, '<br>')}</p><br>`;
             }
             if (reporteDetallado.causas) {
                 detailedReportHtml += `<h3 class="text-lg font-semibold text-gray-800">Causas Posibles (según referencia):</h3><p>${(reporteDetallado.causas || '').replace(/\n/g, '<br>')}</p>`;
@@ -767,19 +765,17 @@ Seu objeto JSON DEVE conter as seguintes chaves e estruturas, preenchendo-as com
 
             document.getElementById('reporte-detallado-content').innerHTML = detailedReportHtml;
 
-            // Populate "Diagnóstico Diferencial" content directly
             document.getElementById('diagnostico-diferencial-content').innerHTML = `<p>${(data.diagnosticoDiferencialCompleto || '').replace(/\n/g, '</p><p>')}</p>`;
 
 
             document.getElementById('explicacion-tecnica-content').innerHTML = `<p>${(data.explicacionTecnica || '').replace(/\n/g, '</p><p>')}</p>`;
             document.getElementById('referencias-content').innerHTML = `<p>${(data.referencias || '').replace(/\n/g, '<br>')}</p>`;
 
-            // Reset tabs to the first one with alternating colors
             document.querySelectorAll('.tab-btn').forEach((btn, index) => {
                 btn.classList.remove('active', 'black-tab', 'red-tab');
                 btn.classList.add('inactive');
             });
-            // Set the first tab as active and apply its corresponding color
+            
             tabs[0].classList.add('active', tabColors[0]);
             tabs[0].classList.remove('inactive');
 
